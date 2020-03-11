@@ -1,21 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const App = () => (
+  <div>
+    <h1>Hello Everybody!</h1>
+  </div>
+);
 
-    render() {
-        return (
-            <div>
-                <h1>Hello World From Index</h1>
-            </div>
-        )
-    }
-}
-
-ReactDOM.render(
-    <h1>Hello, world!</h1>,
-    document.getElementById('app')
-  );
+ReactDOM.render(<App />, document.getElementById('app'));

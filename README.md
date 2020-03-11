@@ -24,5 +24,8 @@ This repository serves as the reservation system for the rent2nite application. 
 # Development
 ## Installing Dependencies
  - From within the root directory:
-``` npm install -g webpack ```
-``` npm install ```
+
+```sh
+npm install -g webpack
+npm install 
+```
