@@ -30,9 +30,12 @@ module.exports = {
         ],
         loader: 'babel-loader',
         query: {
-          presets: ['@babel/react', '@babel/env'],
+          presets: ['@babel/preset-react', '@babel/preset-env'],
         },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
 };
