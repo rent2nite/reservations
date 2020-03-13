@@ -73,3 +73,8 @@ for (let i = 0; i < properties.length; i += 1) {
     });
   }
 }
+
+module.exports = {
+  properties,
+  connection,
+};
