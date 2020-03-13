@@ -11,7 +11,7 @@ class App extends React.Component {
   componentDidMount() {
     ajax({
       method: 'GET',
-      data: { property_id: '014e6b78-1cc0-49c8-8f0b-0e670d7b044d' },
+      data: { property_id: 1 },
       url: '/api/reservations/bookings',
       success: (data) => {
         console.log(data);
@@ -22,7 +22,7 @@ class App extends React.Component {
     });
     ajax({
       method: 'GET',
-      data: { property_id: '014e6b78-1cc0-49c8-8f0b-0e670d7b044d' },
+      data: { property_id: 1 },
       url: '/api/reservations/blackout_days',
       success: (data) => {
         console.log(data);
@@ -41,6 +41,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 export default App;

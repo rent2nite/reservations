@@ -13,7 +13,6 @@ const serviceFee = 30;
 const properties = [];
 for (let i = 0; i < 100; i += 1) {
   const property = {
-    property_id: faker.random.uuid(),
     property_name: `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.zipCode()}`,
     price_per_night: (100 + Math.random() * 400).toFixed(2),
     max_occupants: Math.floor(2 + Math.random() * 10).toFixed(0),
@@ -39,7 +38,7 @@ for (let i = 0; i < properties.length; i += 1) {
     const occupancyFee = properties[i].occupancy_tax_fee;
     const booking = {
       booking_id: faker.random.uuid(),
-      property_id: String(properties[i].property_id),
+      property_id: i + 1,
       starting_date: startDate,
       ending_date: endDate,
       adults,
@@ -57,7 +56,7 @@ for (let i = 0; i < properties.length; i += 1) {
   for (let j = 0; j < 12; j += 1) {
     const blackoutDayOne = {
       blackout_id: faker.random.uuid(),
-      property_id: properties[i].property_id,
+      property_id: i + 1,
       day_blacked_out: `${JSON.stringify(faker.date.between(`2020-0${j + 1}-01`, `2020-0${j + 1}-01`))}`,
     };
     connection.query('INSERT INTO blackout_days SET ?', blackoutDayOne, (error) => {
@@ -65,7 +64,7 @@ for (let i = 0; i < properties.length; i += 1) {
     });
     const blackoutDayTwo = {
       blackout_id: faker.random.uuid(),
-      property_id: properties[i].property_id,
+      property_id: i + 1,
       day_blacked_out: `${JSON.stringify(faker.date.between(`2020-0${j + 1}-22`, `2020-0${j + 1}-27`))}`,
     };
     connection.query('INSERT INTO blackout_days SET ?', blackoutDayTwo, (error) => {
