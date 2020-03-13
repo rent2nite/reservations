@@ -4,9 +4,13 @@
   "description": "dependencies for the reservations page of the rent2nite application",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "jquery": "^3.4.1",
+    "moment": "^2.24.0",
+    "mysql": "^2.18.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
@@ -35,7 +39,8 @@
   "scripts": {
     "test": "jest",
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "seed": "node database/db.js"
   },
   "repository": {
     "type": "git",
