@@ -1,9 +1,10 @@
 import React from 'react';
-import { properties, bookings, blackoutDays } from '../../faker';
+// import { properties, bookings, blackoutDays } from '../../faker';
 
 const App = () => (
   <div>
-    <h1>BLACKOUT DAYS</h1>
+    Hello World
+    {/* <h1>BLACKOUT DAYS</h1>
     {blackoutDays.map((day) => {
       return (
         <div key={day.property_id.concat(day.day_blacked_out)}>
@@ -24,6 +25,7 @@ const App = () => (
           <div>{booking.adults}</div>
           <div>{booking.children}</div>
           <div>{booking.infants}</div>
+          <div>{booking.total_price}</div>
           <br />
         </div>
       );
@@ -41,7 +43,7 @@ const App = () => (
           <br />
         </div>
       );
-    })}
+    })} */}
   </div>
 );
 

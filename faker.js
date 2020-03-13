@@ -1,5 +1,7 @@
 const faker = require('faker');
 
+const serviceFee = 30;
+
 const properties = [];
 for (let i = 0; i < 100; i += 1) {
   properties.push({
@@ -18,14 +20,21 @@ for (let i = 0; i < properties.length; i += 1) {
     const adults = Math.ceil(Math.random() * properties[i].max_occupants);
     const children = Math.floor(Math.random() * (properties[i].max_occupants - adults));
     const infants = Math.floor(Math.random() * (properties[i].max_occupants - adults - children));
+    const startDate = `${JSON.stringify(faker.date.between(`2020-0${j + 1}-04`, `2020-0${j + 1}-09`)).slice(0, 11)}"`;
+    const endDate = `${JSON.stringify(faker.date.between(`2020-0${j + 1}-10`, `2020-0${j + 1}-21`)).slice(0, 11)}"`;
+    const nightsStayed = Number(endDate.slice(9, 11)) - Number(startDate.slice(9, 11));
+    const nightsTimesPricePerNight = Number(properties[i].price_per_night.slice(1)) * nightsStayed;
+    const cleanFee = Number(properties[i].cleaning_fee.slice(1));
+    const occupancyFee = Number(properties[i].occupancy_tax_fee.slice(1));
     const booking = {
       booking_id: faker.random.uuid(),
       property_id: properties[i].property_id,
-      start_date: `${JSON.stringify(faker.date.between(`2020-0${j + 1}-04`, `2020-0${j + 1}-09`)).slice(0, 11)}"`,
-      end_date: `${JSON.stringify(faker.date.between(`2020-0${j + 1}-10`, `2020-0${j + 1}-21`)).slice(0, 11)}"`,
+      start_date: startDate,
+      end_date: endDate,
       adults,
       children,
       infants,
+      total_price: (nightsTimesPricePerNight + cleanFee + occupancyFee + serviceFee).toFixed(2),
     };
     bookings.push(booking);
   }
