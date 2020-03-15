@@ -7,6 +7,13 @@ const port = 3001;
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
+app.get('/api/reservations/properties', (req, res) => {
+  connection.query(`SELECT * FROM properties WHERE property_id = "${req.query.property_id}"`, (error, results) => {
+    if (error) throw (error);
+    else res.send(results);
+  });
+});
+
 app.get('/api/reservations/bookings', (req, res) => {
   connection.query(`SELECT * FROM bookings WHERE bookings.property_id = "${req.query.property_id}"`, (error, results) => {
     if (error) throw (error);

@@ -1,14 +1,30 @@
 import React from 'react';
 import { ajax } from 'jquery';
+import ReserveFrom from './ReserveForm';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentProperty: {},
     };
   }
 
   componentDidMount() {
+    const { currentProperty } = this.state;
+    ajax({
+      method: 'GET',
+      data: { property_id: 1 },
+      url: '/api/reservations/properties',
+      success: (data) => {
+        this.setState({
+          currentProperty: data[0],
+        }, () => console.log(currentProperty));
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
     ajax({
       method: 'GET',
       data: { property_id: 1 },
@@ -34,9 +50,10 @@ class App extends React.Component {
   }
 
   render() {
+    const { currentProperty } = this.state;
     return (
       <div>
-        Howdy World
+        <ReserveFrom currentProperty={currentProperty} />
       </div>
     );
   }
