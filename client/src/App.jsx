@@ -10,6 +10,7 @@ const Wrapper = styled.section`
   padding: 15px;
   width: 30%;
   float: right;
+  margin: 50px 50px 0px 0px;
 `;
 
 class App extends React.Component {

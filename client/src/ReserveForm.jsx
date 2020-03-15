@@ -62,7 +62,7 @@ class ReserveForm extends React.Component {
     this.state = {
       startDate: 'Check In',
       endDate: 'Check Out',
-      guests: '',
+      guests: 'Guests',
       calendarModalOpen: false,
       guestsModalOpen: false,
     };
@@ -110,7 +110,23 @@ class ReserveForm extends React.Component {
           <DateInput type="text" value={startDate} readOnly onClick={this.openCalendarModal} />
           <ArrowInput disabled="disabled" value="-->" readOnly />
           <DateInput type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
-          <Modal id="calender-modal" isOpen={calendarModalOpen} onRequestClose={this.closeCalendarModal}>
+          <Modal
+            id="calender-modal"
+            isOpen={calendarModalOpen}
+            onRequestClose={this.closeCalendarModal}
+            style={{
+              overlay: {
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+              },
+              content: {
+                border: '0.5px solid grey',
+                padding: '15px',
+                backgroundColor: 'yellow',
+                width: '30%',
+                height: '30%',
+              },
+            }}
+          >
             <Calendar />
             <button type="submit" onClick={this.closeCalendarModal}>Close</button>
           </Modal>
@@ -118,7 +134,23 @@ class ReserveForm extends React.Component {
         <form id="guests-form">
           <Title>Guests</Title>
           <GuestsInput type="text" value={guests} readOnly onClick={this.openGuestsModal} />
-          <Modal id="guests-modal" isOpen={guestsModalOpen} onRequestClose={this.closeGuestsModal}>
+          <Modal
+            id="guests-modal"
+            isOpen={guestsModalOpen}
+            onRequestClose={this.closeGuestsModal}
+            style={{
+              overlay: {
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+              },
+              content: {
+                border: '0.5px solid grey',
+                padding: '15px',
+                backgroundColor: 'orange',
+                width: '30%',
+                height: '30%',
+              },
+            }}
+          >
             <Guests />
             <button type="submit" onClick={this.closeGuestsModal}>Close</button>
           </Modal>
