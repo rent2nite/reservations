@@ -9,6 +9,7 @@ const Wrapper = styled.section`
   border: 0.5px solid grey;
   padding: 15px;
   width: 30%;
+  float: right;
 `;
 
 class App extends React.Component {
@@ -23,7 +24,7 @@ class App extends React.Component {
     // all 3 initial gets should be refactored to just one ajax call
     ajax({
       method: 'GET',
-      data: { property_id: 1 },
+      data: { property_id: 19 },
       url: '/api/reservations/properties',
       success: (data) => {
         this.setState({
@@ -36,7 +37,7 @@ class App extends React.Component {
     });
     ajax({
       method: 'GET',
-      data: { property_id: 1 },
+      data: { property_id: 19 },
       url: '/api/reservations/bookings',
       success: (data) => {
         console.log(data);
@@ -47,7 +48,7 @@ class App extends React.Component {
     });
     ajax({
       method: 'GET',
-      data: { property_id: 1 },
+      data: { property_id: 19 },
       url: '/api/reservations/blackout_days',
       success: (data) => {
         console.log(data);

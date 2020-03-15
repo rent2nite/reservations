@@ -1,11 +1,30 @@
 import React from 'react';
+import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Calendar from './Calendar';
+import Guests from './Guests';
+
+Modal.setAppElement('#app');
+
+const PriceTitle = styled.span`
+  font-size: 1.5em;
+  text-align: left;
+  color: black;
+  float: left;
+`;
+
+const PerNightTitle = styled.span`
+  font-size: 0.75em;
+  text-align: left;
+  color: black;
+  float: left;
+`;
 
 const Title = styled.h3`
   font-size: 1.5em;
   text-align: left;
-  color: palevioletred;
+  color: black;
 `;
 
 const DateInput = styled.input`
@@ -24,7 +43,8 @@ const ArrowInput = styled.input`
 `;
 
 const GuestsInput = styled.input`
-  font-size: 1.8em;
+  font-size: 0.4em;
+  height: 10em;
   width: 90%;
 `;
 
@@ -43,42 +63,65 @@ class ReserveForm extends React.Component {
       startDate: 'Check In',
       endDate: 'Check Out',
       guests: '',
+      calendarModalOpen: false,
+      guestsModalOpen: false,
     };
 
-    this.handleStartDateChange = this.handleStartDateChange.bind(this);
-    this.handleEndDateChange = this.handleEndDateChange.bind(this);
+    this.openCalendarModal = this.openCalendarModal.bind(this);
+    this.closeCalendarModal = this.closeCalendarModal.bind(this);
+    this.openGuestsModal = this.openGuestsModal.bind(this);
+    this.closeGuestsModal = this.closeGuestsModal.bind(this);
   }
 
-  handleStartDateChange(event) {
-    const { startDate } = this.state;
-    this.setState({ startDate: event.target.value }, () => console.log(startDate));
+  openCalendarModal() {
+    this.setState({
+      calendarModalOpen: true,
+    });
   }
 
-  handleEndDateChange(event) {
-    const { endDate } = this.state;
-    this.setState({ endDate: event.target.value }, () => console.log(endDate));
+  closeCalendarModal() {
+    this.setState({
+      calendarModalOpen: false,
+    });
+  }
+
+  openGuestsModal() {
+    this.setState({
+      guestsModalOpen: true,
+    });
+  }
+
+  closeGuestsModal() {
+    this.setState({
+      guestsModalOpen: false,
+    });
   }
 
   render() {
     const { currentProperty } = this.props;
-    const { startDate, endDate, guests } = this.state;
+    const { startDate, endDate, guests, calendarModalOpen, guestsModalOpen } = this.state;
     return (
       <div>
-        <div>
-          <Title>
-            <span id="pricePerNight">{`$${currentProperty.price_per_night}`}</span>
-            <span> per night</span>
-          </Title>
-        </div>
+        <PriceTitle id="pricePerNight">{`$${currentProperty.price_per_night}`}</PriceTitle>
+        <PerNightTitle> per night</PerNightTitle>
+        <br />
         <form id="dates-form">
           <Title>Dates</Title>
-          <DateInput type="text" value={startDate} readOnly onClick={() => console.log('Clicked StartDate')} />
+          <DateInput type="text" value={startDate} readOnly onClick={this.openCalendarModal} />
           <ArrowInput disabled="disabled" value="-->" readOnly />
-          <DateInput type="text" value={endDate} readOnly onClick={() => console.log('Clicked EndDate')} />
+          <DateInput type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
+          <Modal id="calender-modal" isOpen={calendarModalOpen} onRequestClose={this.closeCalendarModal}>
+            <Calendar />
+            <button type="submit" onClick={this.closeCalendarModal}>Close</button>
+          </Modal>
         </form>
         <form id="guests-form">
           <Title>Guests</Title>
-          <GuestsInput type="text" value={guests} readOnly onClick={() => console.log('Clicked Guests')} />
+          <GuestsInput type="text" value={guests} readOnly onClick={this.openGuestsModal} />
+          <Modal id="guests-modal" isOpen={guestsModalOpen} onRequestClose={this.closeGuestsModal}>
+            <Guests />
+            <button type="submit" onClick={this.closeGuestsModal}>Close</button>
+          </Modal>
         </form>
         <br />
         <ReserveButton type="submit">Reserve</ReserveButton>

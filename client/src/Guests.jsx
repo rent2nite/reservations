@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Calendar extends React.Component {
+class Guests extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,10 +10,10 @@ class Calendar extends React.Component {
   render() {
     return (
       <div>
-        This is a calendar
+        This is a guest form
       </div>
     );
   }
 }
 
-export default Calendar;
+export default Guests;
