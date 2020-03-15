@@ -1,6 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
 import { ajax } from 'jquery';
 import ReserveFrom from './ReserveForm';
+
+
+const Wrapper = styled.section`
+  text-align: center;
+  border: 0.5px solid grey;
+  padding: 15px;
+  width: 30%;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const { currentProperty } = this.state;
+    // all 3 initial gets should be refactored to just one ajax call
     ajax({
       method: 'GET',
       data: { property_id: 1 },
@@ -19,7 +28,7 @@ class App extends React.Component {
       success: (data) => {
         this.setState({
           currentProperty: data[0],
-        }, () => console.log(currentProperty));
+        }, () => console.log(this.state.currentProperty));
       },
       error: (err) => {
         console.log(err);
@@ -52,9 +61,9 @@ class App extends React.Component {
   render() {
     const { currentProperty } = this.state;
     return (
-      <div>
+      <Wrapper>
         <ReserveFrom currentProperty={currentProperty} />
-      </div>
+      </Wrapper>
     );
   }
 }
