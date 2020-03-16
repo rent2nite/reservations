@@ -66,6 +66,7 @@ class Calendar extends React.Component {
     this.prevMonth = this.prevMonth.bind(this);
     this.formattedTime = this.formattedTime.bind(this);
     this.dbFormattedTime = this.dbFormattedTime.bind(this);
+    this.changeStartDate = this.changeStartDate.bind(this);
   }
 
   dbFormattedTime(d) {
@@ -121,10 +122,18 @@ class Calendar extends React.Component {
     });
   }
 
+  changeStartDate(d) {
+    const { populateDateField } = this.props;
+    populateDateField(this.dbFormattedTime(d));
+  }
+
   render() {
+    // grabDateClicked only if it is not blacked out amd not booked
+    // start with just startDate
+    // set state of reserveForm StartDate and EndDate (Depending on if user clicked checkin or checkout)
+    // set state of reserveForm AvailableDates (Highlight all dates between startDate and last legal endDate)
+    // If EndDate > startDate swap them
     const { currentProperty, currentBookings, currentBlackOutDays } = this.props;
-    // create different styled components for blackour booked and open
-    // check each day and assign it to its corresponding style
     const weekdayNames = this.weekdaysShort.map((day) => {
       return (
         <Box colSpan={`${8 / 7}`} key={day} id="weekday">{day}</Box>
@@ -143,7 +152,7 @@ class Calendar extends React.Component {
       })) {
         daysAfterFirstOfMonth.push(
           <BlackedOutBox key={d * Math.random()}>
-            <span value={d} onClick={() => { this.dbFormattedTime(d); }}>{d}</span>
+            <span value={d}>{d}</span>
           </BlackedOutBox>,
         );
       } else if (currentBookings.some((e) => {
@@ -151,13 +160,13 @@ class Calendar extends React.Component {
       })) {
         daysAfterFirstOfMonth.push(
           <BookedBox key={d * Math.random()}>
-            <span value={d} onClick={() => { this.dbFormattedTime(d); }}>{d}</span>
+            <span value={d}>{d}</span>
           </BookedBox>,
         );
       } else {
         daysAfterFirstOfMonth.push(
           <Box key={d * Math.random()}>
-            <span value={d} onClick={() => { this.dbFormattedTime(d); }}>{d}</span>
+            <span value={d} onClick={() => { this.changeStartDate(d); }}>{d}</span>
           </Box>,
         );
       }
