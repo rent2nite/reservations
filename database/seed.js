@@ -23,9 +23,9 @@ for (let i = 0; i < properties.length; i += 1) {
     const adults = Math.ceil(Math.random() * properties[i].max_occupants);
     const children = Math.floor(Math.random() * (properties[i].max_occupants - adults));
     const infants = Math.floor(Math.random() * (properties[i].max_occupants - adults - children));
-    const startDate = `${JSON.stringify(faker.date.between(`2020-0${j + 1}-04`, `2020-0${j + 1}-09`))}`;
-    const endDate = `${JSON.stringify(faker.date.between(`2020-0${j + 1}-10`, `2020-0${j + 1}-21`))}`;
-    const nightsStayed = Number(endDate.slice(9, 11)) - Number(startDate.slice(9, 11));
+    const startDate = `${JSON.stringify(faker.date.between(`2020-0${j + 1}-04`, `2020-0${j + 1}-09`)).slice(1, 11)}`;
+    const endDate = `${JSON.stringify(faker.date.between(`2020-0${j + 1}-10`, `2020-0${j + 1}-21`)).slice(1, 11)}`;
+    const nightsStayed = Number(endDate.slice(8, 10)) - Number(startDate.slice(8, 10));
     const costOfNights = properties[i].price_per_night * nightsStayed;
     const cleanFee = properties[i].cleaning_fee;
     const occupancyFee = properties[i].occupancy_tax_fee;
@@ -50,7 +50,7 @@ for (let i = 0; i < properties.length; i += 1) {
     const blackoutDayOne = {
       blackout_id: faker.random.uuid(),
       property_id: i + 1,
-      day_blacked_out: `${JSON.stringify(faker.date.between(`2020-0${j + 1}-01`, `2020-0${j + 1}-01`))}`,
+      day_blacked_out: `${JSON.stringify(faker.date.between(`2020-0${j + 1}-01`, `2020-0${j + 1}-03`)).slice(1, 11)}`,
     };
     connection.query('INSERT INTO blackout_days SET ?', blackoutDayOne, (error) => {
       if (error) throw error;
@@ -58,7 +58,7 @@ for (let i = 0; i < properties.length; i += 1) {
     const blackoutDayTwo = {
       blackout_id: faker.random.uuid(),
       property_id: i + 1,
-      day_blacked_out: `${JSON.stringify(faker.date.between(`2020-0${j + 1}-22`, `2020-0${j + 1}-27`))}`,
+      day_blacked_out: `${JSON.stringify(faker.date.between(`2020-0${j + 1}-22`, `2020-0${j + 1}-27`)).slice(1, 11)}`,
     };
     connection.query('INSERT INTO blackout_days SET ?', blackoutDayTwo, (error) => {
       if (error) throw error;

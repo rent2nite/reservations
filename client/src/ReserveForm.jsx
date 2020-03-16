@@ -98,7 +98,7 @@ class ReserveForm extends React.Component {
   }
 
   render() {
-    const { currentProperty } = this.props;
+    const { currentProperty, currentBookings, currentBlackOutDays } = this.props;
     const { startDate, endDate, guests, calendarModalOpen, guestsModalOpen } = this.state;
     return (
       <div>
@@ -130,7 +130,7 @@ class ReserveForm extends React.Component {
               },
             }}
           >
-            <Calendar />
+            <Calendar currentProperty={currentProperty} currentBookings={currentBookings} currentBlackOutDays={currentBlackOutDays} />
             <br />
             <button type="submit" onClick={this.closeCalendarModal}>Close</button>
           </Modal>
@@ -168,17 +168,6 @@ class ReserveForm extends React.Component {
     );
   }
 }
-
-// const Wrapper = styled.section`
-//   text-align: center;
-//   border: 0.5px solid grey;
-//   padding: 15px;
-//   position: fixed;
-//   top: 10%;
-//   right: 10%;
-//   width: 30%;
-//   height: 50%;
-// `;
 
 ReserveForm.propTypes = {
   currentProperty: PropTypes.shape({

@@ -20,6 +20,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProperty: {},
+      currentBookings: [],
+      currentBlackOutDays: [],
     };
   }
 
@@ -32,7 +34,7 @@ class App extends React.Component {
       success: (data) => {
         this.setState({
           currentProperty: data[0],
-        }, () => console.log(this.state.currentProperty));
+        });
       },
       error: (err) => {
         console.log(err);
@@ -43,7 +45,9 @@ class App extends React.Component {
       data: { property_id: 19 },
       url: '/api/reservations/bookings',
       success: (data) => {
-        console.log(data);
+        this.setState({
+          currentBookings: data,
+        });
       },
       error: (err) => {
         console.log(err);
@@ -54,7 +58,9 @@ class App extends React.Component {
       data: { property_id: 19 },
       url: '/api/reservations/blackout_days',
       success: (data) => {
-        console.log(data);
+        this.setState({
+          currentBlackOutDays: data,
+        });
       },
       error: (err) => {
         console.log(err);
@@ -63,10 +69,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentProperty } = this.state;
+    const { currentProperty, currentBookings, currentBlackOutDays } = this.state;
     return (
       <Wrapper>
-        <ReserveFrom currentProperty={currentProperty} />
+        <ReserveFrom currentBlackOutDays={currentBlackOutDays} currentBookings={currentBookings} currentProperty={currentProperty} />
       </Wrapper>
     );
   }

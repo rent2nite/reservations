@@ -38,15 +38,25 @@ const Box = styled.td`
   width: 1.125em;
 `;
 
+const BookedBox = styled.td`
+  text-align: center;
+  width: 1.125em;
+  background-color: yellow;
+`;
+
+const BlackedOutBox = styled.td`
+  text-align: center;
+  width: 1.125em;
+  background-color: red;
+`;
+
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dateContext: moment(),
-      daysClicked: [],
     };
 
-    this.onDayClick = this.onDayClick.bind(this);
     this.weekdaysShort = moment.weekdaysShort();
     this.months = moment.months();
     this.year = this.year.bind(this);
@@ -54,13 +64,18 @@ class Calendar extends React.Component {
     this.daysInMonth = this.daysInMonth.bind(this);
     this.nextMonth = this.nextMonth.bind(this);
     this.prevMonth = this.prevMonth.bind(this);
+    this.formattedTime = this.formattedTime.bind(this);
+    this.dbFormattedTime = this.dbFormattedTime.bind(this);
   }
 
-  onDayClick(d) {
-    const { daysClicked } = this.state;
-    const newDaysClicked = [...daysClicked];
-    newDaysClicked.push(`${this.month()} ${d}, ${this.year()}`);
-    this.setState({ daysClicked: newDaysClicked }, () => console.log(this.state.daysClicked));
+  dbFormattedTime(d) {
+    let current = `${this.formattedTime()}`;
+    if (d.toString().length > 1) {
+      current = current.slice(0, current.length - 2).concat(`${d}`);
+    } else {
+      current = current.slice(0, current.length - 2).concat(`0${d}`);
+    }
+    return current;
   }
 
   year() {
@@ -71,6 +86,11 @@ class Calendar extends React.Component {
   month() {
     const { dateContext } = this.state;
     return dateContext.format('MMMM');
+  }
+
+  formattedTime() {
+    const { dateContext } = this.state;
+    return dateContext.format('YYYY-MM-DD');
   }
 
   daysInMonth() {
@@ -102,6 +122,9 @@ class Calendar extends React.Component {
   }
 
   render() {
+    const { currentProperty, currentBookings, currentBlackOutDays } = this.props;
+    // create different styled components for blackour booked and open
+    // check each day and assign it to its corresponding style
     const weekdayNames = this.weekdaysShort.map((day) => {
       return (
         <Box colSpan={`${8 / 7}`} key={day} id="weekday">{day}</Box>
@@ -115,11 +138,29 @@ class Calendar extends React.Component {
 
     const daysAfterFirstOfMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d += 1) {
-      daysAfterFirstOfMonth.push(
-        <Box key={d * Math.random()}>
-          <span value={d} onClick={() => { this.onDayClick(d); }}>{d}</span>
-        </Box>,
-      );
+      if (currentBlackOutDays.some((e) => {
+        return e.day_blacked_out === this.dbFormattedTime(d);
+      })) {
+        daysAfterFirstOfMonth.push(
+          <BlackedOutBox key={d * Math.random()}>
+            <span value={d} onClick={() => { this.dbFormattedTime(d); }}>{d}</span>
+          </BlackedOutBox>,
+        );
+      } else if (currentBookings.some((e) => {
+        return this.dbFormattedTime(d) >= e.starting_date && this.dbFormattedTime(d) <= e.ending_date;
+      })) {
+        daysAfterFirstOfMonth.push(
+          <BookedBox key={d * Math.random()}>
+            <span value={d} onClick={() => { this.dbFormattedTime(d); }}>{d}</span>
+          </BookedBox>,
+        );
+      } else {
+        daysAfterFirstOfMonth.push(
+          <Box key={d * Math.random()}>
+            <span value={d} onClick={() => { this.dbFormattedTime(d); }}>{d}</span>
+          </Box>,
+        );
+      }
     }
 
     const allDaysInPeriod = [...daysBeforeFirstOfMonth, ...daysAfterFirstOfMonth];
@@ -151,13 +192,13 @@ class Calendar extends React.Component {
         <CalendarTable className="calendar">
           <thead>
             <CalendarHeaderRow className="calendar-header">
-              <Box colSpan="2" className="nav-month">
+              <Box colSpan="1" className="nav-month">
                 <span className="prev-month" onClick={() => { this.prevMonth(); }}>{'<'}</span>
               </Box>
-              <Box colSpan="3" className="nav-month">
+              <Box colSpan="5" className="nav-month">
                 <span className="display-month">{`${this.month()}, ${this.year()}`}</span>
               </Box>
-              <Box colSpan="2" className="nav-month">
+              <Box colSpan="1" className="nav-month">
                 <span className="next-month" onClick={() => { this.nextMonth(); }}>{'>'}</span>
               </Box>
             </CalendarHeaderRow>
