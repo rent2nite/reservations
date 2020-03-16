@@ -124,10 +124,14 @@ class ReserveForm extends React.Component {
                 backgroundColor: 'yellow',
                 width: '30%',
                 height: '30%',
+                // position: 'fixed',
+                top: '30%',
+                // left: '10%',
               },
             }}
           >
             <Calendar />
+            <br />
             <button type="submit" onClick={this.closeCalendarModal}>Close</button>
           </Modal>
         </form>
@@ -145,9 +149,12 @@ class ReserveForm extends React.Component {
               content: {
                 border: '0.5px solid grey',
                 padding: '15px',
-                backgroundColor: 'orange',
+                backgroundColor: 'purple',
                 width: '30%',
                 height: '30%',
+                // position: 'fixed',
+                top: '50%',
+                // left: '10%',
               },
             }}
           >

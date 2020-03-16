@@ -8,9 +8,11 @@ const Wrapper = styled.section`
   text-align: center;
   border: 0.5px solid grey;
   padding: 15px;
+  position: fixed;
+  top: 10%;
+  right: 10%;
   width: 30%;
-  float: right;
-  margin: 50px 50px 0px 0px;
+  height: 50%;
 `;
 
 class App extends React.Component {
