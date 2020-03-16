@@ -119,9 +119,9 @@ class ReserveForm extends React.Component {
                 backgroundColor: 'rgba(0, 0, 0, 0)',
               },
               content: {
-                border: '0.5px solid grey',
+                border: '1px solid black',
                 padding: '15px',
-                backgroundColor: 'yellow',
+                backgroundColor: 'white',
                 width: '30%',
                 height: '30%',
                 // position: 'fixed',
@@ -153,8 +153,8 @@ class ReserveForm extends React.Component {
                 width: '30%',
                 height: '30%',
                 // position: 'fixed',
-                top: '50%',
-                // left: '10%',
+                top: '10%',
+                left: '10%',
               },
             }}
           >
@@ -168,6 +168,17 @@ class ReserveForm extends React.Component {
     );
   }
 }
+
+// const Wrapper = styled.section`
+//   text-align: center;
+//   border: 0.5px solid grey;
+//   padding: 15px;
+//   position: fixed;
+//   top: 10%;
+//   right: 10%;
+//   width: 30%;
+//   height: 50%;
+// `;
 
 ReserveForm.propTypes = {
   currentProperty: PropTypes.shape({

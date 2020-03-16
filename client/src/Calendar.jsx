@@ -11,14 +11,31 @@ const CalendarTable = styled.table`
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
+  height: 200%;
 `;
 
-const Day = styled.span`
-  font-size: 0.8em;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
+const CalendarHeaderRow = styled.tr`
+  background-color: #f1f1f1;
+  width: 100px;
+  text-align: center;
+  line-height: 56px;
+  font-size: 28px;
+  padding: 10px;
+  margin: 15px;
+`;
+
+
+const CalendarBodyRow = styled.tr`
+  width: 100px;
+  text-align: center;
+  line-height: 25px;
+  font-size: 16px;
+  padding: 10px;
+`;
+
+const Box = styled.td`
+  text-align: center;
+  width: 1.125em;
 `;
 
 class Calendar extends React.Component {
@@ -26,8 +43,10 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       dateContext: moment(),
+      daysClicked: [],
     };
 
+    this.onDayClick = this.onDayClick.bind(this);
     this.weekdaysShort = moment.weekdaysShort();
     this.months = moment.months();
     this.year = this.year.bind(this);
@@ -35,7 +54,13 @@ class Calendar extends React.Component {
     this.daysInMonth = this.daysInMonth.bind(this);
     this.nextMonth = this.nextMonth.bind(this);
     this.prevMonth = this.prevMonth.bind(this);
+  }
 
+  onDayClick(d) {
+    const { daysClicked } = this.state;
+    const newDaysClicked = [...daysClicked];
+    newDaysClicked.push(`${this.month()} ${d}, ${this.year()}`);
+    this.setState({ daysClicked: newDaysClicked }, () => console.log(this.state.daysClicked));
   }
 
   year() {
@@ -76,51 +101,48 @@ class Calendar extends React.Component {
     });
   }
 
-
   render() {
-    const weekdays = this.weekdaysShort.map((day) => {
+    const weekdayNames = this.weekdaysShort.map((day) => {
       return (
-        <td key={day} id="weekday">{day}</td>
+        <Box colSpan={`${8 / 7}`} key={day} id="weekday">{day}</Box>
       );
     });
 
-    const daysBeforeStart = [];
+    const daysBeforeFirstOfMonth = [];
     for (let i = 0; i < this.firstDayOfMonth(); i += 1) {
-      daysBeforeStart.push(<td className="daysBeforeStart"></td>);
+      daysBeforeFirstOfMonth.push(<Box key={i * Math.random()} className="daysBeforeFirstOfMonth" />);
     }
 
-    const daysUntilEnd = [];
+    const daysAfterFirstOfMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d += 1) {
-      daysUntilEnd.push(
-        <td key={d}>
-          <Day>{d}</Day>
-        </td>,
+      daysAfterFirstOfMonth.push(
+        <Box key={d * Math.random()}>
+          <span value={d} onClick={() => { this.onDayClick(d); }}>{d}</span>
+        </Box>,
       );
     }
 
-    const totalMonthView = [...daysBeforeStart, ...daysUntilEnd];
-    const rows = [];
-    let cells = [];
-    totalMonthView.forEach((row, i) => {
+    const allDaysInPeriod = [...daysBeforeFirstOfMonth, ...daysAfterFirstOfMonth];
+    const weeks = [];
+    let week = [];
+    allDaysInPeriod.forEach((day, i) => {
       if (i % 7 !== 0) {
-        cells.push(row);
+        week.push(day);
       } else {
-        rows.push(cells.slice()); // new row
-        cells = [];
-        cells.push(row);
+        weeks.push([...week]);
+        week = [];
+        week.push(day);
       }
-      if (i === totalMonthView.length - 1) {
-        rows.push(cells.slice()); // new row
+      if (i === allDaysInPeriod.length - 1) {
+        weeks.push([...week]);
       }
     });
 
-    console.log(totalMonthView);
-
-    const trElements = rows.map((d) => {
+    const trElements = weeks.map((weekRow) => {
       return (
-        <tr key={Math.random()}>
-          {d}
-        </tr>
+        <CalendarBodyRow colSpan="1" key={Math.random()}>
+          {weekRow}
+        </CalendarBodyRow>
       );
     });
 
@@ -128,24 +150,22 @@ class Calendar extends React.Component {
       <Wrapper className="calendar-container">
         <CalendarTable className="calendar">
           <thead>
-            <tr className="calendar-header">
-              <td colSpan="3" className="nav-month">
-                <span className="prev-month" onClick={() => { this.prevMonth(); }}>
-                  {'<'}
-                </span>
-                <span>
-                  {`${this.month()}, ${this.year()}`}
-                </span>
-                <span className="next-month" onClick={() => { this.nextMonth(); }}>
-                  {'>'}
-                </span>
-              </td>
-            </tr>
+            <CalendarHeaderRow className="calendar-header">
+              <Box colSpan="2" className="nav-month">
+                <span className="prev-month" onClick={() => { this.prevMonth(); }}>{'<'}</span>
+              </Box>
+              <Box colSpan="3" className="nav-month">
+                <span className="display-month">{`${this.month()}, ${this.year()}`}</span>
+              </Box>
+              <Box colSpan="2" className="nav-month">
+                <span className="next-month" onClick={() => { this.nextMonth(); }}>{'>'}</span>
+              </Box>
+            </CalendarHeaderRow>
           </thead>
           <tbody>
-            <tr>
-              {weekdays}
-            </tr>
+            <CalendarBodyRow>
+              {weekdayNames}
+            </CalendarBodyRow>
             {trElements}
           </tbody>
         </CalendarTable>
