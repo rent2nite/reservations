@@ -10,5 +10,5 @@
 // Days should change property from open to booked when a user makes a reservation
 // Only open days can be clicked
 // If an open day is clicked as startDate then an open day
-// is clicked as endDate, but in between the 2 dates there is a non-open date, does not work
+// is clicked as endDate, but in between the 2 dates there is a non-open date, app does not work
 // Clear dates should clear all dates

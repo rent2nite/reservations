@@ -56,6 +56,14 @@ const ReserveButton = styled.button`
   border-radius: 1em;
 `;
 
+const ClearDates = styled.span`
+  position: absolute;
+  right: 1em;
+  padding: 5px;
+  color: purple;
+  text-decoration: underline;
+`;
+
 class ReserveForm extends React.Component {
   constructor(props) {
     super(props);
@@ -73,6 +81,14 @@ class ReserveForm extends React.Component {
     this.closeGuestsModal = this.closeGuestsModal.bind(this);
     this.populateStartDateField = this.populateStartDateField.bind(this);
     this.populateEndDateField = this.populateEndDateField.bind(this);
+    this.clearDates = this.clearDates.bind(this);
+  }
+
+  clearDates() {
+    this.setState({
+      startDate: 'Check In',
+      endDate: 'Check Out',
+    });
   }
 
   openCalendarModal() {
@@ -155,7 +171,7 @@ class ReserveForm extends React.Component {
               endDate={endDate}
             />
             <br />
-            <button type="submit" onClick={this.closeCalendarModal}>Close</button>
+            <ClearDates type="submit" onClick={this.clearDates}>Clear Dates</ClearDates>
           </Modal>
         </form>
         <form id="guests-form">
