@@ -198,7 +198,7 @@ class ReserveForm extends React.Component {
               },
             }}
           >
-            <Guests />
+            <Guests currentProperty={currentProperty} />
             <div>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</div>
             <ClearClose type="submit" onClick={this.closeGuestsModal}>Close</ClearClose>
           </Modal>

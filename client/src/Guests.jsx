@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
 `;
@@ -43,11 +44,14 @@ class Guests extends React.Component {
   }
 
   incrementAdults() {
-    const { adults } = this.state;
-    const newAdults = adults + 1;
-    this.setState({
-      adults: newAdults,
-    }, () => console.log(adults));
+    const { adults, children } = this.state;
+    const { currentProperty } = this.props;
+    if (adults + children < currentProperty.max_occupants) {
+      const newAdults = adults + 1;
+      this.setState({
+        adults: newAdults,
+      }, () => console.log('adults:', this.state.adults));
+    }
   }
 
   decrementAdults() {
@@ -56,16 +60,19 @@ class Guests extends React.Component {
       const newAdults = adults - 1;
       this.setState({
         adults: newAdults,
-      }, () => console.log(adults));
+      }, () => console.log('adults:', this.state.adults));
     }
   }
 
   incrementChildren() {
-    const { children } = this.state;
-    const newChildren = children + 1;
-    this.setState({
-      children: newChildren,
-    }, () => console.log(children));
+    const { adults, children } = this.state;
+    const { currentProperty } = this.props;
+    if (adults + children < currentProperty.max_occupants) {
+      const newChildren = children + 1;
+      this.setState({
+        children: newChildren,
+      }, () => console.log('children:', this.state.children));
+    }
   }
 
   decrementChildren() {
@@ -74,16 +81,18 @@ class Guests extends React.Component {
       const newChildren = children - 1;
       this.setState({
         children: newChildren,
-      }, () => console.log(children));
+      }, () => console.log('children:', this.state.children));
     }
   }
 
   incrementInfants() {
     const { infants } = this.state;
-    const newInfants = infants + 1;
-    this.setState({
-      infants: newInfants,
-    }, () => console.log(infants));
+    if (infants < 5) {
+      const newInfants = infants + 1;
+      this.setState({
+        infants: newInfants,
+      }, () => console.log('infants:', this.state.infants));
+    }
   }
 
   decrementInfants() {
@@ -92,7 +101,7 @@ class Guests extends React.Component {
       const newInfants = infants - 1;
       this.setState({
         infants: newInfants,
-      }, () => console.log(infants));
+      }, () => console.log('infants:', this.state.infants));
     }
   }
 
@@ -132,5 +141,11 @@ class Guests extends React.Component {
     );
   }
 }
+
+Guests.propTypes = {
+  currentProperty: PropTypes.shape({
+    max_occupants: PropTypes.string,
+  }).isRequired,
+};
 
 export default Guests;
