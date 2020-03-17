@@ -55,7 +55,7 @@ const ReserveButton = styled.button`
   border-radius: 1em;
 `;
 
-const ClearDates = styled.span`
+const ClearClose = styled.span`
   position: absolute;
   right: 1em;
   padding: 5px;
@@ -153,11 +153,11 @@ class ReserveForm extends React.Component {
               },
               content: {
                 background: 'white',
-                width: '30%',
+                width: '35%',
                 height: '35%',
                 position: 'fixed',
                 top: '30%',
-                left: '60%',
+                left: '57.5%',
                 padding: '15px',
               },
             }}
@@ -172,7 +172,7 @@ class ReserveForm extends React.Component {
               endDate={endDate}
             />
             <br />
-            <ClearDates type="submit" onClick={this.clearDates}>Clear Dates</ClearDates>
+            <ClearClose type="submit" onClick={this.clearDates}>Clear Dates</ClearClose>
           </Modal>
         </form>
         <form id="guests-form">
@@ -189,17 +189,18 @@ class ReserveForm extends React.Component {
               },
               content: {
                 background: 'white',
-                width: '30%',
+                width: '35%',
                 height: '35%',
                 position: 'fixed',
-                top: '47.5%',
-                left: '60%',
+                top: '45%',
+                left: '57.5%',
                 padding: '15px',
               },
             }}
           >
             <Guests />
-            <button type="submit" onClick={this.closeGuestsModal}>Close</button>
+            <div>6 guests maximum. Infants don&apos;t count toward the number of guests.</div>
+            <ClearClose type="submit" onClick={this.closeGuestsModal}>Close</ClearClose>
           </Modal>
         </form>
         <br />
