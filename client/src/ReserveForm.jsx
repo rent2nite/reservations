@@ -199,7 +199,7 @@ class ReserveForm extends React.Component {
             }}
           >
             <Guests />
-            <div>6 guests maximum. Infants don&apos;t count toward the number of guests.</div>
+            <div>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</div>
             <ClearClose type="submit" onClick={this.closeGuestsModal}>Close</ClearClose>
           </Modal>
         </form>
@@ -211,7 +211,10 @@ class ReserveForm extends React.Component {
 }
 
 ReserveForm.propTypes = {
-  currentProperty: PropTypes.shape({ price_per_night: PropTypes.string }).isRequired,
+  currentProperty: PropTypes.shape({
+    price_per_night: PropTypes.string,
+    max_occupants: PropTypes.string,
+  }).isRequired,
   currentBlackOutDays: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   currentBookings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
