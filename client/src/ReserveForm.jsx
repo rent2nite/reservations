@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import moment from 'moment';
 import Calendar from './Calendar';
 import Guests from './Guests';
 
@@ -81,6 +82,8 @@ class ReserveForm extends React.Component {
     this.populateStartDateField = this.populateStartDateField.bind(this);
     this.populateEndDateField = this.populateEndDateField.bind(this);
     this.clearDates = this.clearDates.bind(this);
+    this.differenceBetweenStartAndEndDate = this.differenceBetweenStartAndEndDate.bind(this);
+    this.calculateTotalPrice = this.calculateTotalPrice.bind(this);
   }
 
   clearDates() {
@@ -127,6 +130,21 @@ class ReserveForm extends React.Component {
     if (d !== 'Check Out') { setTimeout(this.closeCalendarModal, 500); }
   }
 
+  differenceBetweenStartAndEndDate() {
+    const { startDate, endDate } = this.state;
+    const startMoment = [startDate.slice(0, 4), startDate.slice(5, 7) - 1, startDate.slice(8)];
+    const endMoment = [endDate.slice(0, 4), endDate.slice(5, 7) - 1, endDate.slice(8)];
+    return moment(endMoment).diff(startMoment, 'days');
+  }
+
+  calculateTotalPrice() {
+    const { currentProperty } = this.props;
+    const nightsPrice = currentProperty.price_per_night * this.differenceBetweenStartAndEndDate();
+    const cleaning = currentProperty.cleaning_fee;
+    const service = 50;
+    const occupancy = currentProperty.occupancy_tax_fee;
+    return `$${Number(nightsPrice) + Number(cleaning) + service + Number(occupancy)}`;
+  }
 
   render() {
     const { currentProperty, currentBookings, currentBlackOutDays } = this.props;
@@ -205,13 +223,29 @@ class ReserveForm extends React.Component {
           </Modal>
         </form>
         <br />
-        {startDate !== 'Check In' && endDate !== 'Checkout'
+        {endDate !== 'Check Out'
           ? (
             <div>
-              <div>{`$${currentProperty.price_per_night} x soMany nights --> combinedPrice`}</div>
-              <div>{`Cleaning Fee --> $${currentProperty.cleaning_fee}`}</div>
-              <div>{'Service Fee --> $50'}</div>
-              <div>{`Occupancy Taxes and Fees --> $${currentProperty.occupancy_tax_fee}`}</div>
+              <div>
+                <span>{`$${currentProperty.price_per_night} x ${this.differenceBetweenStartAndEndDate()}`}</span>
+                <span>{`$${currentProperty.price_per_night * this.differenceBetweenStartAndEndDate()}`}</span>
+              </div>
+              <div>
+                <span>Cleaning Fee</span>
+                <span>{`$${currentProperty.cleaning_fee}`}</span>
+              </div>
+              <div>
+                <span>Service Fee</span>
+                <span>$50</span>
+              </div>
+              <div>
+                <span>Occupancy Taxes and Fees</span>
+                <span>{`$${currentProperty.occupancy_tax_fee}`}</span>
+              </div>
+              <div>
+                <span>Total</span>
+                <span>{this.calculateTotalPrice()}</span>
+              </div>
             </div>
           )
           : null}
