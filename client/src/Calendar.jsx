@@ -67,16 +67,16 @@ class Calendar extends React.Component {
 
     this.weekdaysShort = moment.weekdaysShort();
     this.months = moment.months();
-    this.year = this.year.bind(this);
-    this.month = this.month.bind(this);
+    this.getFirstInvalidEndDate = this.getFirstInvalidEndDate.bind(this);
+    this.changeStartEndDate = this.changeStartEndDate.bind(this);
     this.daysInMonth = this.daysInMonth.bind(this);
+    this.month = this.month.bind(this);
     this.nextMonth = this.nextMonth.bind(this);
     this.prevMonth = this.prevMonth.bind(this);
+    this.isBeforeThisMonth = this.isBeforeThisMonth.bind(this);
+    this.year = this.year.bind(this);
     this.formattedTime = this.formattedTime.bind(this);
     this.dbFormattedTime = this.dbFormattedTime.bind(this);
-    this.changeStartEndDate = this.changeStartEndDate.bind(this);
-    this.getFirstInvalidEndDate = this.getFirstInvalidEndDate.bind(this);
-    this.isBeforeThisMonth = this.isBeforeThisMonth.bind(this);
   }
 
   getFirstInvalidEndDate(d) {
@@ -95,19 +95,31 @@ class Calendar extends React.Component {
     return closestAfter;
   }
 
-  dbFormattedTime(d) {
-    let current = `${this.formattedTime()}`;
-    if (d.toString().length > 1) {
-      current = current.slice(0, current.length - 2).concat(`${d}`);
-    } else {
-      current = current.slice(0, current.length - 2).concat(`0${d}`);
+  changeStartEndDate(d) {
+    const {
+      populateStartDateField, populateEndDateField, startDate, endDate,
+    } = this.props;
+    if (startDate === 'Check In') {
+      populateStartDateField(this.dbFormattedTime(d));
+    } else if (this.dbFormattedTime(d) >= this.getFirstInvalidEndDate(startDate)) {
+      populateStartDateField(this.dbFormattedTime(d));
+      populateEndDateField('Check Out');
+    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate)
+    && this.dbFormattedTime(d) > startDate) {
+      populateEndDateField(this.dbFormattedTime(d));
+    } else if (this.dbFormattedTime(d) < startDate) {
+      if (endDate >= this.getFirstInvalidEndDate(this.dbFormattedTime(d))) {
+        populateEndDateField('Check Out');
+      } else {
+        populateEndDateField(startDate);
+      }
+      populateStartDateField(this.dbFormattedTime(d));
     }
-    return current;
   }
 
-  year() {
+  daysInMonth() {
     const { dateContext } = this.state;
-    return dateContext.format('Y');
+    return dateContext.daysInMonth();
   }
 
   month() {
@@ -115,15 +127,6 @@ class Calendar extends React.Component {
     return dateContext.format('MMMM');
   }
 
-  formattedTime() {
-    const { dateContext } = this.state;
-    return dateContext.format('YYYY-MM-DD');
-  }
-
-  daysInMonth() {
-    const { dateContext } = this.state;
-    return dateContext.daysInMonth();
-  }
 
   firstDayOfMonth() {
     const { dateContext } = this.state;
@@ -153,23 +156,24 @@ class Calendar extends React.Component {
     return (dateContext.format('YYYYMM') < today.format('YYYYMM'));
   }
 
-  changeStartEndDate(d) {
-    const {
-      populateStartDateField, populateEndDateField, startDate, endDate,
-    } = this.props;
-    if (startDate === 'Check In') {
-      populateStartDateField(this.dbFormattedTime(d));
-    } else if (this.dbFormattedTime(d) >= this.getFirstInvalidEndDate(startDate)) {
-      populateStartDateField(this.dbFormattedTime(d));
-      populateEndDateField('Check Out');
-    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate)
-    && this.dbFormattedTime(d) > startDate) {
-      populateEndDateField(this.dbFormattedTime(d));
-    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate)
-    && this.dbFormattedTime(d) < startDate) {
-      populateStartDateField(this.dbFormattedTime(d));
-      if (endDate >= this.getFirstInvalidEndDate(this.dbFormattedTime(d))) { populateEndDateField('Check Out'); }
+  year() {
+    const { dateContext } = this.state;
+    return dateContext.format('Y');
+  }
+
+  formattedTime() {
+    const { dateContext } = this.state;
+    return dateContext.format('YYYY-MM-DD');
+  }
+
+  dbFormattedTime(d) {
+    let current = `${this.formattedTime()}`;
+    if (d.toString().length > 1) {
+      current = current.slice(0, current.length - 2).concat(`${d}`);
+    } else {
+      current = current.slice(0, current.length - 2).concat(`0${d}`);
     }
+    return current;
   }
 
   render() {
@@ -241,7 +245,7 @@ class Calendar extends React.Component {
 
     const trElements = weeks.map((weekRow) => {
       return (
-        <CalendarBodyRow colSpan="1" key={Math.random()}>
+        <CalendarBodyRow className="weekly-data" colSpan="1" key={Math.random()}>
           {weekRow}
         </CalendarBodyRow>
       );
@@ -249,16 +253,16 @@ class Calendar extends React.Component {
 
     return (
       <Wrapper>
-        <CalendarTable>
+        <CalendarTable className="calendar-table">
           <thead>
             <CalendarHeaderRow>
-              <Box colSpan="1" onClick={() => { this.prevMonth(); }}>{'<'}</Box>
-              <Box colSpan="5">{`${this.month()}, ${this.year()}`}</Box>
-              <Box colSpan="1" onClick={() => { this.nextMonth(); }}>{'>'}</Box>
+              <Box className="calendar-month-prev" colSpan="1" onClick={() => { this.prevMonth(); }}>{'<'}</Box>
+              <Box className="calendar-month-header" colSpan="5">{`${this.month()}, ${this.year()}`}</Box>
+              <Box className="calendar-month-next" colSpan="1" onClick={() => { this.nextMonth(); }}>{'>'}</Box>
             </CalendarHeaderRow>
           </thead>
           <tbody>
-            <CalendarBodyRow>
+            <CalendarBodyRow className="weekdays">
               {weekdayNames}
             </CalendarBodyRow>
             {trElements}

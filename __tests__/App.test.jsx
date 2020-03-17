@@ -8,7 +8,7 @@ describe('Unit Tests For App Component', () => {
   beforeEach(() => {
     wrapper = shallow(<App />);
   });
-  test('should render the app component on the screen', () => {
+  test('should render the app component', () => {
     expect(wrapper).toExist();
   });
 });

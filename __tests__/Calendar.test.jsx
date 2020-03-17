@@ -1,14 +1,38 @@
-// CALENDAR
-// Day of week should correspond with correct date
-// Calendar should display all days in current month
-// Calendar should display the correct number of days for each month
-// Calendar should have a button to change month
-// Calendar should display the correct data for each month when month is changed
-// Calendar should display the correct data when year is changed
-// Days that are booked should have a property of booked and different styling
-// Days that are blacked out should have a property of blacked_out and different styling
-// Days should change property from open to booked when a user makes a reservation
-// Only open days can be clicked
-// If an open day is clicked as startDate then an open day
-// is clicked as endDate, but in between the 2 dates there is a non-open date, app does not work
-// Clear dates should clear all dates
+/* eslint-env jest */
+import React from 'react';
+import { shallow } from 'enzyme';
+import Calendar from '../client/src/Calendar';
+
+describe('Unit Tests For ReserveForm Component', () => {
+  let wrapper;
+  const currentProperty = { price_per_night: '462.23' };
+  const currentBookings = [];
+  const currentBlackOutDays = [];
+  beforeEach(() => {
+    wrapper = shallow(<Calendar
+      currentProperty={currentProperty}
+      currentBookings={currentBookings}
+      currentBlackOutDays={currentBlackOutDays}
+      populateStartDateField={() => {}}
+      populateEndDateField={() => {}}
+      startDate="startDate"
+      endDate="endDate"
+    />);
+  });
+  test('should render the calendar form component', () => {
+    expect(wrapper).toExist();
+  });
+  test('should have a table header displaying a month', () => {
+    expect(wrapper.find('.calendar-month-header')).toBeDefined();
+  });
+  test('should have a table displaying the weekdays', () => {
+    expect(wrapper.find('.weekdays')).toBeDefined();
+  });
+  test('should have a table displaying the days in the month', () => {
+    expect(wrapper.find('.weekly-data')).toBeDefined();
+  });
+  test('should have two buttons to change the month', () => {
+    expect(wrapper.find('.calendar-month-prev')).toBeDefined();
+    expect(wrapper.find('.calendar-month-next')).toBeDefined();
+  });
+});

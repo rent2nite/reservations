@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import Calendar from './Calendar';
 import Guests from './Guests';
 
-Modal.setAppElement('#app');
-
 const Wrapper = styled.section`
   text-align: center;
 `;
@@ -136,16 +134,17 @@ class ReserveForm extends React.Component {
     } = this.state;
     return (
       <Wrapper>
-        <PriceTitle>{`$${currentProperty.price_per_night}`}</PriceTitle>
-        <PerNightTitle> per night</PerNightTitle>
+        <PriceTitle className="price-per-night">{`$${currentProperty.price_per_night} `}</PriceTitle>
+        <PerNightTitle className="price-per-night">per night</PerNightTitle>
         <br />
         <form id="dates-form">
           <Title>Dates</Title>
-          <DateInput type="text" value={startDate} readOnly onClick={this.openCalendarModal} />
+          <DateInput className="start-date" type="text" value={startDate} readOnly onClick={this.openCalendarModal} />
           <ArrowInput disabled="disabled" value="-->" readOnly />
-          <DateInput type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
+          <DateInput className="end-date" type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
           <Modal
-            id="calender-modal"
+            className="calender-modal"
+            ariaHideApp={false}
             isOpen={calendarModalOpen}
             onRequestClose={this.closeCalendarModal}
             style={{
@@ -180,6 +179,7 @@ class ReserveForm extends React.Component {
           <GuestsInput type="text" value={guests} readOnly onClick={this.openGuestsModal} />
           <Modal
             id="guests-modal"
+            ariaHideApp={false}
             isOpen={guestsModalOpen}
             onRequestClose={this.closeGuestsModal}
             style={{
