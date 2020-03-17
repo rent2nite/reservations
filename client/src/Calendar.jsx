@@ -50,6 +50,12 @@ const BlackedOutBox = styled.td`
   background-color: red;
 `;
 
+const BeingBookedBox = styled.td`
+  text-align: center;
+  width: 1.125em;
+  background-color: blue;
+`;
+
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
@@ -69,7 +75,7 @@ class Calendar extends React.Component {
     this.dbFormattedTime = this.dbFormattedTime.bind(this);
     this.changeStartEndDate = this.changeStartEndDate.bind(this);
     this.getFirstInvalidEndDate = this.getFirstInvalidEndDate.bind(this);
-    this.isBeforeToday = this.isBeforeToday.bind(this);
+    this.isBeforeThisMonth = this.isBeforeThisMonth.bind(this);
   }
 
   getFirstInvalidEndDate(d) {
@@ -141,7 +147,7 @@ class Calendar extends React.Component {
     });
   }
 
-  isBeforeToday() {
+  isBeforeThisMonth() {
     const { dateContext, today } = this.state;
     return (dateContext.format('YYYYMM') < today.format('YYYYMM'));
   }
@@ -163,7 +169,7 @@ class Calendar extends React.Component {
 
   render() {
     // (Highlight all dates between startDate and endDate) DO NOW
-    const { currentProperty, currentBookings, currentBlackOutDays } = this.props;
+    const { currentProperty, currentBookings, currentBlackOutDays, startDate, endDate } = this.props;
     const { dateContext, today } = this.state;
     const weekdayNames = this.weekdaysShort.map((day) => {
       return (
@@ -177,9 +183,15 @@ class Calendar extends React.Component {
     }
     const daysAfterFirstOfMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d += 1) {
-      if (currentBlackOutDays.some((e) => {
+      if (this.dbFormattedTime(d) >= startDate && this.dbFormattedTime(d) <= (endDate === 'Check Out' ? startDate : endDate)) {
+        daysAfterFirstOfMonth.push(
+          <BeingBookedBox key={d * Math.random()}>
+            <span value={d}>{d}</span>
+          </BeingBookedBox>,
+        );
+      } else if (currentBlackOutDays.some((e) => {
         return e.day_blacked_out === this.dbFormattedTime(d);
-      }) || this.isBeforeToday() || (dateContext.format('YYYYMM') === today.format('YYYYMM') && d < today.format('D'))) {
+      }) || this.isBeforeThisMonth() || (dateContext.format('YYYYMM') === today.format('YYYYMM') && d < today.format('D'))) {
         daysAfterFirstOfMonth.push(
           <BlackedOutBox key={d * Math.random()}>
             <span value={d}>{d}</span>
