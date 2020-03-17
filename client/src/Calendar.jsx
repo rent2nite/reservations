@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -153,15 +154,19 @@ class Calendar extends React.Component {
   }
 
   changeStartEndDate(d) {
-    const { populateStartDateField, populateEndDateField, startDate, endDate } = this.props;
+    const {
+      populateStartDateField, populateEndDateField, startDate, endDate,
+    } = this.props;
     if (startDate === 'Check In') {
       populateStartDateField(this.dbFormattedTime(d));
     } else if (this.dbFormattedTime(d) >= this.getFirstInvalidEndDate(startDate)) {
       populateStartDateField(this.dbFormattedTime(d));
       populateEndDateField('Check Out');
-    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate) && this.dbFormattedTime(d) > startDate) {
+    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate)
+    && this.dbFormattedTime(d) > startDate) {
       populateEndDateField(this.dbFormattedTime(d));
-    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate) && this.dbFormattedTime(d) < startDate) {
+    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate)
+    && this.dbFormattedTime(d) < startDate) {
       populateStartDateField(this.dbFormattedTime(d));
       if (endDate >= this.getFirstInvalidEndDate(this.dbFormattedTime(d))) { populateEndDateField('Check Out'); }
     }
@@ -169,7 +174,9 @@ class Calendar extends React.Component {
 
   render() {
     // (Highlight all dates between startDate and endDate) DO NOW
-    const { currentProperty, currentBookings, currentBlackOutDays, startDate, endDate } = this.props;
+    const {
+      currentBookings, currentBlackOutDays, startDate, endDate,
+    } = this.props;
     const { dateContext, today } = this.state;
     const weekdayNames = this.weekdaysShort.map((day) => {
       return (
@@ -185,7 +192,7 @@ class Calendar extends React.Component {
     for (let d = 1; d <= this.daysInMonth(); d += 1) {
       if (this.dbFormattedTime(d) >= startDate && this.dbFormattedTime(d) <= (endDate === 'Check Out' ? startDate : endDate)) {
         daysAfterFirstOfMonth.push(
-          <BeingBookedBox key={d * Math.random()}>
+          <BeingBookedBox key={d * Math.random()} onClick={() => { this.changeStartEndDate(d); }}>
             <span value={d}>{d}</span>
           </BeingBookedBox>,
         );
@@ -198,7 +205,8 @@ class Calendar extends React.Component {
           </BlackedOutBox>,
         );
       } else if (currentBookings.some((e) => {
-        return this.dbFormattedTime(d) >= e.starting_date && this.dbFormattedTime(d) <= e.ending_date;
+        return this.dbFormattedTime(d) >= e.starting_date
+        && this.dbFormattedTime(d) <= e.ending_date;
       })) {
         daysAfterFirstOfMonth.push(
           <BookedBox key={d * Math.random()}>
@@ -207,13 +215,8 @@ class Calendar extends React.Component {
         );
       } else {
         daysAfterFirstOfMonth.push(
-          <Box id="open" key={d * Math.random()}>
-            <span 
-              value={d}
-              onClick={() => { this.changeStartEndDate(d); }}
-            >
-              {d}
-            </span>
+          <Box id="open" key={d * Math.random()} onClick={() => { this.changeStartEndDate(d); }}>
+            <span value={d}>{d}</span>
           </Box>,
         );
       }
@@ -248,14 +251,14 @@ class Calendar extends React.Component {
         <CalendarTable className="calendar">
           <thead>
             <CalendarHeaderRow className="calendar-header">
-              <Box colSpan="1" className="nav-month">
-                <span className="prev-month" onClick={() => { this.prevMonth(); }}>{'<'}</span>
+              <Box colSpan="1" className="nav-month" onClick={() => { this.prevMonth(); }}>
+                <span className="prev-month">{'<'}</span>
               </Box>
               <Box colSpan="5" className="nav-month">
                 <span className="display-month">{`${this.month()}, ${this.year()}`}</span>
               </Box>
-              <Box colSpan="1" className="nav-month">
-                <span className="next-month" onClick={() => { this.nextMonth(); }}>{'>'}</span>
+              <Box colSpan="1" className="nav-month" onClick={() => { this.nextMonth(); }}>
+                <span className="next-month">{'>'}</span>
               </Box>
             </CalendarHeaderRow>
           </thead>
@@ -270,5 +273,15 @@ class Calendar extends React.Component {
     );
   }
 }
+
+Calendar.propTypes = {
+  currentProperty: PropTypes.shape({ price_per_night: PropTypes.string }).isRequired,
+  currentBlackOutDays: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  currentBookings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  populateStartDateField: PropTypes.func.isRequired,
+  populateEndDateField: PropTypes.func.isRequired,
+};
 
 export default Calendar;

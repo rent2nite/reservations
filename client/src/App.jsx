@@ -72,7 +72,11 @@ class App extends React.Component {
     const { currentProperty, currentBookings, currentBlackOutDays } = this.state;
     return (
       <Wrapper>
-        <ReserveFrom currentBlackOutDays={currentBlackOutDays} currentBookings={currentBookings} currentProperty={currentProperty} />
+        <ReserveFrom
+          currentBlackOutDays={currentBlackOutDays}
+          currentBookings={currentBookings}
+          currentProperty={currentProperty}
+        />
       </Wrapper>
     );
   }

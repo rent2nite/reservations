@@ -34,9 +34,6 @@ const DateInput = styled.input`
 `;
 
 const ArrowInput = styled.input`
-  /* Adapt the colors based on primary prop */
-  // background: ${(props) => props.primary ? "palevioletred" : "white"};
-  // color: ${(props) => props.primary ? "white" : "palevioletred"};
   font-size: 0.8em;
   height: 5em;
   width: 10%;
@@ -118,19 +115,21 @@ class ReserveForm extends React.Component {
   populateStartDateField(d) {
     this.setState({
       startDate: d,
-    }, () => console.log(`${this.state.startDate} --> ${this.state.endDate}`));
+    });
   }
 
   populateEndDateField(d) {
     this.setState({
       endDate: d,
-    }, () => console.log(`${this.state.startDate} --> ${this.state.endDate}`));
+    });
   }
 
 
   render() {
     const { currentProperty, currentBookings, currentBlackOutDays } = this.props;
-    const { startDate, endDate, guests, calendarModalOpen, guestsModalOpen } = this.state;
+    const {
+      startDate, endDate, guests, calendarModalOpen, guestsModalOpen,
+    } = this.state;
     return (
       <div>
         <PriceTitle id="pricePerNight">{`$${currentProperty.price_per_night}`}</PriceTitle>
@@ -154,7 +153,7 @@ class ReserveForm extends React.Component {
                 padding: '15px',
                 backgroundColor: 'white',
                 width: '30%',
-                height: '30%',
+                height: '35%',
                 // position: 'fixed',
                 top: '30%',
                 // left: '10%',
@@ -209,14 +208,9 @@ class ReserveForm extends React.Component {
 }
 
 ReserveForm.propTypes = {
-  currentProperty: PropTypes.shape({
-    property_id: PropTypes.number,
-    property_name: PropTypes.string,
-    price_per_night: PropTypes.string,
-    max_occupants: PropTypes.string,
-    cleaning_fee: PropTypes.string,
-    occupancy_fee: PropTypes.string,
-  }).isRequired,
+  currentProperty: PropTypes.shape({ price_per_night: PropTypes.string }).isRequired,
+  currentBlackOutDays: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  currentBookings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default ReserveForm;
