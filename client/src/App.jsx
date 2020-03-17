@@ -10,8 +10,8 @@ const Wrapper = styled.section`
   padding: 15px;
   position: fixed;
   top: 10%;
-  right: 10%;
-  width: 30%;
+  left: 57.5%;
+  width: 35%;
   height: 50%;
 `;
 

@@ -173,27 +173,28 @@ class Calendar extends React.Component {
   }
 
   render() {
-    // (Highlight all dates between startDate and endDate) DO NOW
     const {
       currentBookings, currentBlackOutDays, startDate, endDate,
     } = this.props;
     const { dateContext, today } = this.state;
     const weekdayNames = this.weekdaysShort.map((day) => {
       return (
-        <Box colSpan={`${8 / 7}`} key={day} id="weekday">{day}</Box>
+        <Box colSpan={`${8 / 7}`} key={day}>
+          {day}
+        </Box>
       );
     });
 
     const daysBeforeFirstOfMonth = [];
     for (let i = 0; i < this.firstDayOfMonth(); i += 1) {
-      daysBeforeFirstOfMonth.push(<Box key={i * Math.random()} className="daysBeforeFirstOfMonth" />);
+      daysBeforeFirstOfMonth.push(<Box key={i * Math.random()} />);
     }
     const daysAfterFirstOfMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d += 1) {
       if (this.dbFormattedTime(d) >= startDate && this.dbFormattedTime(d) <= (endDate === 'Check Out' ? startDate : endDate)) {
         daysAfterFirstOfMonth.push(
           <BeingBookedBox key={d * Math.random()} onClick={() => { this.changeStartEndDate(d); }}>
-            <span value={d}>{d}</span>
+            {d}
           </BeingBookedBox>,
         );
       } else if (currentBlackOutDays.some((e) => {
@@ -201,7 +202,7 @@ class Calendar extends React.Component {
       }) || this.isBeforeThisMonth() || (dateContext.format('YYYYMM') === today.format('YYYYMM') && d < today.format('D'))) {
         daysAfterFirstOfMonth.push(
           <BlackedOutBox key={d * Math.random()}>
-            <span value={d}>{d}</span>
+            {d}
           </BlackedOutBox>,
         );
       } else if (currentBookings.some((e) => {
@@ -210,13 +211,13 @@ class Calendar extends React.Component {
       })) {
         daysAfterFirstOfMonth.push(
           <BookedBox key={d * Math.random()}>
-            <span value={d}>{d}</span>
+            {d}
           </BookedBox>,
         );
       } else {
         daysAfterFirstOfMonth.push(
-          <Box id="open" key={d * Math.random()} onClick={() => { this.changeStartEndDate(d); }}>
-            <span value={d}>{d}</span>
+          <Box key={d * Math.random()} onClick={() => { this.changeStartEndDate(d); }}>
+            {d}
           </Box>,
         );
       }
@@ -247,19 +248,13 @@ class Calendar extends React.Component {
     });
 
     return (
-      <Wrapper className="calendar-container">
-        <CalendarTable className="calendar">
+      <Wrapper>
+        <CalendarTable>
           <thead>
-            <CalendarHeaderRow className="calendar-header">
-              <Box colSpan="1" className="nav-month" onClick={() => { this.prevMonth(); }}>
-                <span className="prev-month">{'<'}</span>
-              </Box>
-              <Box colSpan="5" className="nav-month">
-                <span className="display-month">{`${this.month()}, ${this.year()}`}</span>
-              </Box>
-              <Box colSpan="1" className="nav-month" onClick={() => { this.nextMonth(); }}>
-                <span className="next-month">{'>'}</span>
-              </Box>
+            <CalendarHeaderRow>
+              <Box colSpan="1" onClick={() => { this.prevMonth(); }}>{'<'}</Box>
+              <Box colSpan="5">{`${this.month()}, ${this.year()}`}</Box>
+              <Box colSpan="1" onClick={() => { this.nextMonth(); }}>{'>'}</Box>
             </CalendarHeaderRow>
           </thead>
           <tbody>

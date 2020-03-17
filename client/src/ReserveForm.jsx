@@ -7,6 +7,10 @@ import Guests from './Guests';
 
 Modal.setAppElement('#app');
 
+const Wrapper = styled.section`
+  text-align: center;
+`;
+
 const PriceTitle = styled.span`
   font-size: 1.5em;
   text-align: left;
@@ -131,8 +135,8 @@ class ReserveForm extends React.Component {
       startDate, endDate, guests, calendarModalOpen, guestsModalOpen,
     } = this.state;
     return (
-      <div>
-        <PriceTitle id="pricePerNight">{`$${currentProperty.price_per_night}`}</PriceTitle>
+      <Wrapper>
+        <PriceTitle>{`$${currentProperty.price_per_night}`}</PriceTitle>
         <PerNightTitle> per night</PerNightTitle>
         <br />
         <form id="dates-form">
@@ -149,14 +153,12 @@ class ReserveForm extends React.Component {
                 backgroundColor: 'rgba(0, 0, 0, 0)',
               },
               content: {
-                border: '1px solid black',
-                padding: '15px',
-                backgroundColor: 'white',
-                width: '30%',
+                width: '35%',
                 height: '35%',
-                // position: 'fixed',
+                position: 'fixed',
                 top: '30%',
-                // left: '10%',
+                left: '57.5%',
+                padding: '15px',
               },
             }}
           >
@@ -185,14 +187,12 @@ class ReserveForm extends React.Component {
                 backgroundColor: 'rgba(0, 0, 0, 0)',
               },
               content: {
-                border: '0.5px solid grey',
+                width: '35%',
+                height: '35%',
+                position: 'fixed',
+                top: '47.5%',
+                left: '57.5%',
                 padding: '15px',
-                backgroundColor: 'purple',
-                width: '30%',
-                height: '30%',
-                // position: 'fixed',
-                top: '10%',
-                left: '10%',
               },
             }}
           >
@@ -202,7 +202,7 @@ class ReserveForm extends React.Component {
         </form>
         <br />
         <ReserveButton type="submit">Reserve</ReserveButton>
-      </div>
+      </Wrapper>
     );
   }
 }
