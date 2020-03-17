@@ -55,6 +55,7 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       dateContext: moment(),
+      today: moment(),
     };
 
     this.weekdaysShort = moment.weekdaysShort();
@@ -66,7 +67,25 @@ class Calendar extends React.Component {
     this.prevMonth = this.prevMonth.bind(this);
     this.formattedTime = this.formattedTime.bind(this);
     this.dbFormattedTime = this.dbFormattedTime.bind(this);
-    this.changeStartDate = this.changeStartDate.bind(this);
+    this.changeStartEndDate = this.changeStartEndDate.bind(this);
+    this.getFirstInvalidEndDate = this.getFirstInvalidEndDate.bind(this);
+    this.isBeforeToday = this.isBeforeToday.bind(this);
+  }
+
+  getFirstInvalidEndDate(d) {
+    const { currentBookings, currentBlackOutDays } = this.props;
+    let closestAfter = '9999-12-31';
+    currentBookings.forEach((booking) => {
+      if (booking.starting_date < closestAfter && booking.starting_date > d) {
+        closestAfter = booking.starting_date;
+      }
+    });
+    currentBlackOutDays.forEach((day) => {
+      if (day.day_blacked_out < closestAfter && day.day_blacked_out > d) {
+        closestAfter = day.day_blacked_out;
+      }
+    });
+    return closestAfter;
   }
 
   dbFormattedTime(d) {
@@ -122,18 +141,30 @@ class Calendar extends React.Component {
     });
   }
 
-  changeStartDate(d) {
-    const { populateDateField } = this.props;
-    populateDateField(this.dbFormattedTime(d));
+  isBeforeToday() {
+    const { dateContext, today } = this.state;
+    return (dateContext.format('YYYYMM') < today.format('YYYYMM'));
+  }
+
+  changeStartEndDate(d) {
+    const { populateStartDateField, populateEndDateField, startDate, endDate } = this.props;
+    if (startDate === 'Check In') {
+      populateStartDateField(this.dbFormattedTime(d));
+    } else if (this.dbFormattedTime(d) >= this.getFirstInvalidEndDate(startDate)) {
+      populateStartDateField(this.dbFormattedTime(d));
+      populateEndDateField('Check Out');
+    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate) && this.dbFormattedTime(d) > startDate) {
+      populateEndDateField(this.dbFormattedTime(d));
+    } else if (this.dbFormattedTime(d) < this.getFirstInvalidEndDate(startDate) && this.dbFormattedTime(d) < startDate) {
+      populateStartDateField(this.dbFormattedTime(d));
+      if (endDate >= this.getFirstInvalidEndDate(this.dbFormattedTime(d))) { populateEndDateField('Check Out'); }
+    }
   }
 
   render() {
-    // grabDateClicked only if it is not blacked out amd not booked
-    // start with just startDate
-    // set state of reserveForm StartDate and EndDate (Depending on if user clicked checkin or checkout)
-    // set state of reserveForm AvailableDates (Highlight all dates between startDate and last legal endDate)
-    // If EndDate > startDate swap them
+    // (Highlight all dates between startDate and endDate) DO NOW
     const { currentProperty, currentBookings, currentBlackOutDays } = this.props;
+    const { dateContext, today } = this.state;
     const weekdayNames = this.weekdaysShort.map((day) => {
       return (
         <Box colSpan={`${8 / 7}`} key={day} id="weekday">{day}</Box>
@@ -144,12 +175,11 @@ class Calendar extends React.Component {
     for (let i = 0; i < this.firstDayOfMonth(); i += 1) {
       daysBeforeFirstOfMonth.push(<Box key={i * Math.random()} className="daysBeforeFirstOfMonth" />);
     }
-
     const daysAfterFirstOfMonth = [];
     for (let d = 1; d <= this.daysInMonth(); d += 1) {
       if (currentBlackOutDays.some((e) => {
         return e.day_blacked_out === this.dbFormattedTime(d);
-      })) {
+      }) || this.isBeforeToday() || (dateContext.format('YYYYMM') === today.format('YYYYMM') && d < today.format('D'))) {
         daysAfterFirstOfMonth.push(
           <BlackedOutBox key={d * Math.random()}>
             <span value={d}>{d}</span>
@@ -165,8 +195,13 @@ class Calendar extends React.Component {
         );
       } else {
         daysAfterFirstOfMonth.push(
-          <Box key={d * Math.random()}>
-            <span value={d} onClick={() => { this.changeStartDate(d); }}>{d}</span>
+          <Box id="open" key={d * Math.random()}>
+            <span 
+              value={d}
+              onClick={() => { this.changeStartEndDate(d); }}
+            >
+              {d}
+            </span>
           </Box>,
         );
       }

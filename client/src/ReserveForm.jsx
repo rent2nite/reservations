@@ -71,7 +71,8 @@ class ReserveForm extends React.Component {
     this.closeCalendarModal = this.closeCalendarModal.bind(this);
     this.openGuestsModal = this.openGuestsModal.bind(this);
     this.closeGuestsModal = this.closeGuestsModal.bind(this);
-    this.populateDateField = this.populateDateField.bind(this);
+    this.populateStartDateField = this.populateStartDateField.bind(this);
+    this.populateEndDateField = this.populateEndDateField.bind(this);
   }
 
   openCalendarModal() {
@@ -98,23 +99,18 @@ class ReserveForm extends React.Component {
     });
   }
 
-  populateDateField(d) {
-    const { startDate } = this.state;
-    if (startDate === 'Check In') {
-      this.setState({
-        startDate: d,
-      }, () => console.log(this.state.startDate, ' --> StartDate', this.state.endDate, ' --> EndDate'));
-    } else if (d < startDate) {
-      this.setState({
-        endDate: startDate,
-        startDate: d,
-      }, () => console.log(this.state.startDate, ' --> StartDate', this.state.endDate, ' --> EndDate'));
-    } else {
-      this.setState({
-        endDate: d,
-      }, () => console.log(this.state.startDate, ' --> StartDate', this.state.endDate, ' --> EndDate'));
-    }
+  populateStartDateField(d) {
+    this.setState({
+      startDate: d,
+    }, () => console.log(`${this.state.startDate} --> ${this.state.endDate}`));
   }
+
+  populateEndDateField(d) {
+    this.setState({
+      endDate: d,
+    }, () => console.log(`${this.state.startDate} --> ${this.state.endDate}`));
+  }
+
 
   render() {
     const { currentProperty, currentBookings, currentBlackOutDays } = this.props;
@@ -153,7 +149,10 @@ class ReserveForm extends React.Component {
               currentProperty={currentProperty}
               currentBookings={currentBookings}
               currentBlackOutDays={currentBlackOutDays}
-              populateDateField={this.populateDateField}
+              populateStartDateField={this.populateStartDateField}
+              populateEndDateField={this.populateEndDateField}
+              startDate={startDate}
+              endDate={endDate}
             />
             <br />
             <button type="submit" onClick={this.closeCalendarModal}>Close</button>
