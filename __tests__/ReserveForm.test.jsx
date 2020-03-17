@@ -27,7 +27,7 @@ describe('Unit Tests For ReserveForm Component', () => {
   });
 });
 
-describe('Unit Tests For ReserveForm Component Linking Properly To Calendar And Guest Modals And Components', () => {
+describe('Unit Tests For ReserveForm Component Linking Properly To Calendar And Guest Components', () => {
   let wrapper;
   const currentProperty = { price_per_night: '462.23' };
   const currentBookings = [];
@@ -48,8 +48,9 @@ describe('Unit Tests For ReserveForm Component Linking Properly To Calendar And 
   test('Should contain a Calendar Table', () => {
     expect(wrapper.find('calendar-table')).toBeDefined();
   });
-  // test('Should contain a Guests xxx', () => {
-  // });
+  test('Should contain a Guests xxx', () => {
+    expect(wrapper.find('guests-table')).toBeDefined();
+  });
 });
 
 // Should render a component with element reserve

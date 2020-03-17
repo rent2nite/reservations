@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Calendar from '../client/src/Calendar';
 
-describe('Unit Tests For ReserveForm Component', () => {
+describe('Unit Tests For Calendar Component', () => {
   let wrapper;
   const currentProperty = { price_per_night: '462.23' };
   const currentBookings = [];

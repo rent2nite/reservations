@@ -109,30 +109,30 @@ class Guests extends React.Component {
     const { adults, children, infants } = this.state;
     return (
       <Wrapper>
-        <GuestsTable>
+        <GuestsTable className="guests-table">
           <tbody>
             <GuestsRow>
-              <GuestData>Adults</GuestData>
+              <GuestData className="adults-label">Adults</GuestData>
               <GuestData>
-                <button type="submit" onClick={this.decrementAdults}>-</button>
+                <button className="adults-decrement" type="submit" onClick={this.decrementAdults}>-</button>
                 {adults}
-                <button type="submit" onClick={this.incrementAdults}>+</button>
+                <button className="adults-increment" type="submit" onClick={this.incrementAdults}>+</button>
               </GuestData>
             </GuestsRow>
             <GuestsRow>
-              <GuestData>Children</GuestData>
+              <GuestData className="children-label">Children</GuestData>
               <GuestData>
-                <button type="submit" onClick={this.decrementChildren}>-</button>
+                <button className="children-decrement" type="submit" onClick={this.decrementChildren}>-</button>
                 {children}
-                <button type="submit" onClick={this.incrementChildren}>+</button>
+                <button className="children-increment" type="submit" onClick={this.incrementChildren}>+</button>
               </GuestData>
             </GuestsRow>
             <GuestsRow>
-              <GuestData>Infants</GuestData>
+              <GuestData className="infants-label">Infants</GuestData>
               <GuestData>
-                <button type="submit" onClick={this.decrementInfants}>-</button>
+                <button className="infants-decrement" type="submit" onClick={this.decrementInfants}>-</button>
                 {infants}
-                <button type="submit" onClick={this.incrementInfants}>+</button>
+                <button className="infants-increment" type="submit" onClick={this.incrementInfants}>+</button>
               </GuestData>
             </GuestsRow>
           </tbody>
