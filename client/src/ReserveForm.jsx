@@ -152,11 +152,12 @@ class ReserveForm extends React.Component {
                 backgroundColor: 'rgba(0, 0, 0, 0)',
               },
               content: {
-                width: '35%',
+                background: 'white',
+                width: '30%',
                 height: '35%',
                 position: 'fixed',
                 top: '30%',
-                left: '57.5%',
+                left: '60%',
                 padding: '15px',
               },
             }}
@@ -187,11 +188,12 @@ class ReserveForm extends React.Component {
                 backgroundColor: 'rgba(0, 0, 0, 0)',
               },
               content: {
-                width: '35%',
+                background: 'white',
+                width: '30%',
                 height: '35%',
                 position: 'fixed',
                 top: '47.5%',
-                left: '57.5%',
+                left: '60%',
                 padding: '15px',
               },
             }}
