@@ -124,6 +124,7 @@ class ReserveForm extends React.Component {
     this.setState({
       endDate: d,
     });
+    if (d !== 'Check Out') { setTimeout(this.closeCalendarModal, 500); }
   }
 
 
@@ -204,6 +205,16 @@ class ReserveForm extends React.Component {
           </Modal>
         </form>
         <br />
+        {startDate !== 'Check In' && endDate !== 'Checkout'
+          ? (
+            <div>
+              <div>{`$${currentProperty.price_per_night} x soMany nights --> combinedPrice`}</div>
+              <div>{`Cleaning Fee --> $${currentProperty.cleaning_fee}`}</div>
+              <div>{'Service Fee --> $50'}</div>
+              <div>{`Occupancy Taxes and Fees --> $${currentProperty.occupancy_tax_fee}`}</div>
+            </div>
+          )
+          : null}
         <ReserveButton type="submit">Reserve</ReserveButton>
       </Wrapper>
     );
@@ -214,6 +225,8 @@ ReserveForm.propTypes = {
   currentProperty: PropTypes.shape({
     price_per_night: PropTypes.string,
     max_occupants: PropTypes.string,
+    cleaning_fee: PropTypes.string,
+    occupancy_tax_fee: PropTypes.string,
   }).isRequired,
   currentBlackOutDays: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   currentBookings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

@@ -48,7 +48,7 @@ describe('Unit Tests For ReserveForm Component Linking Properly To Calendar And 
   test('Should contain a Calendar Table', () => {
     expect(wrapper.find('calendar-table')).toBeDefined();
   });
-  test('Should contain a Guests xxx', () => {
+  test('Should contain a Guests Table', () => {
     expect(wrapper.find('guests-table')).toBeDefined();
   });
 });
