@@ -49,11 +49,41 @@ const ArrowInput = styled.input`
   width: 10%;
 `;
 
+const CalendarModalStyle = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+  },
+  content: {
+    background: 'white',
+    width: '35%',
+    height: '35%',
+    position: 'fixed',
+    top: '30%',
+    left: '57.5%',
+    padding: '15px',
+  },
+};
+
 const GuestsInput = styled.input`
   font-size: 0.4em;
   height: 10em;
   width: 90%;
 `;
+
+const GuestModalStyle = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+  },
+  content: {
+    background: 'white',
+    width: '35%',
+    height: '35%',
+    position: 'fixed',
+    top: '45%',
+    left: '57.5%',
+    padding: '15px',
+  },
+};
 
 const ReserveButton = styled.button`
   background: red;
@@ -157,7 +187,9 @@ export default {
   Title,
   DateInput,
   ArrowInput,
+  CalendarModalStyle,
   GuestsInput,
+  GuestModalStyle,
   ReserveButton,
   ClearClose,
   CalendarWrapper,

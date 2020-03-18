@@ -14,7 +14,9 @@ const {
   Title,
   DateInput,
   ArrowInput,
+  CalendarModalStyle,
   GuestsInput,
+  GuestModalStyle,
   ReserveButton,
   ClearClose,
 } = ReserveFormStyles;
@@ -152,20 +154,7 @@ class ReserveForm extends React.Component {
             ariaHideApp={false}
             isOpen={calendarModalOpen}
             onRequestClose={this.closeCalendarModal}
-            style={{
-              overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-              },
-              content: {
-                background: 'white',
-                width: '35%',
-                height: '35%',
-                position: 'fixed',
-                top: '30%',
-                left: '57.5%',
-                padding: '15px',
-              },
-            }}
+            style={CalendarModalStyle}
           >
             <Calendar
               currentProperty={currentProperty}
@@ -193,20 +182,7 @@ class ReserveForm extends React.Component {
             ariaHideApp={false}
             isOpen={guestsModalOpen}
             onRequestClose={this.closeGuestsModal}
-            style={{
-              overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-              },
-              content: {
-                background: 'white',
-                width: '35%',
-                height: '35%',
-                position: 'fixed',
-                top: '45%',
-                left: '57.5%',
-                padding: '15px',
-              },
-            }}
+            style={GuestModalStyle}
           >
             <Guests currentProperty={currentProperty} grabGuestInfo={this.grabGuestInfo} />
             <div>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</div>
