@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import Calendar from './Calendar';
 import Guests from './Guests';
+import PriceInfo from './PriceInfo';
 
 const Wrapper = styled.section`
   text-align: center;
@@ -259,32 +260,13 @@ class ReserveForm extends React.Component {
           </Modal>
         </form>
         <br />
-        {endDate !== 'Check Out'
-          ? (
-            <div>
-              <div>
-                <span>{`$${currentProperty.price_per_night} x ${this.differenceBetweenStartAndEndDate()}`}</span>
-                <span>{`$${(currentProperty.price_per_night * this.differenceBetweenStartAndEndDate()).toFixed(2)}`}</span>
-              </div>
-              <div>
-                <span>Cleaning Fee</span>
-                <span>{`$${currentProperty.cleaning_fee}`}</span>
-              </div>
-              <div>
-                <span>Service Fee</span>
-                <span>$50</span>
-              </div>
-              <div>
-                <span>Occupancy Taxes and Fees</span>
-                <span>{`$${currentProperty.occupancy_tax_fee}`}</span>
-              </div>
-              <div>
-                <span>Total</span>
-                <span>{this.calculateTotalPrice()}</span>
-              </div>
-            </div>
-          )
-          : null}
+        {endDate !== 'Check Out' ? (
+          <PriceInfo
+            currentProperty={currentProperty}
+            differenceBetweenStartAndEndDate={this.differenceBetweenStartAndEndDate}
+            calculateTotalPrice={this.calculateTotalPrice}
+          />
+        ) : null}
         <ReserveButton type="submit" onClick={() => this.makeReservation()}>Reserve</ReserveButton>
       </Wrapper>
     );
