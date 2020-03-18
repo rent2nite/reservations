@@ -2,59 +2,20 @@ import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Styles from './Styles';
+
+const {
+  CalendarTable,
+  CalendarHeaderRow,
+  CalendarBodyRow,
+  Box,
+  BookedBox,
+  BlackedOutBox,
+  BeingBookedBox,
+} = Styles;
 
 const Wrapper = styled.div`
   border: 2px solid grey;
-`;
-
-const CalendarTable = styled.table`
-  background-color: white;
-  border-spacing: 0;
-  border-collapse: collapse;
-  width: 100%;
-  height: 200%;
-`;
-
-const CalendarHeaderRow = styled.tr`
-  background-color: #f1f1f1;
-  width: 100px;
-  text-align: center;
-  line-height: 56px;
-  font-size: 28px;
-  padding: 10px;
-  margin: 15px;
-`;
-
-
-const CalendarBodyRow = styled.tr`
-  width: 100px;
-  text-align: center;
-  line-height: 25px;
-  font-size: 16px;
-  padding: 10px;
-`;
-
-const Box = styled.td`
-  text-align: center;
-  width: 1.125em;
-`;
-
-const BookedBox = styled.td`
-  text-align: center;
-  width: 1.125em;
-  background-color: yellow;
-`;
-
-const BlackedOutBox = styled.td`
-  text-align: center;
-  width: 1.125em;
-  background-color: red;
-`;
-
-const BeingBookedBox = styled.td`
-  text-align: center;
-  width: 1.125em;
-  background-color: blue;
 `;
 
 class Calendar extends React.Component {

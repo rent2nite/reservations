@@ -1,69 +1,23 @@
 import React from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import moment from 'moment';
 import Calendar from './Calendar';
 import Guests from './Guests';
 import PriceInfo from './PriceInfo';
+import ReserveFormStyles from './Styles';
 
-const Wrapper = styled.section`
-  text-align: center;
-`;
-
-const PriceTitle = styled.span`
-  font-size: 1.5em;
-  text-align: left;
-  color: black;
-  float: left;
-`;
-
-const PerNightTitle = styled.span`
-  font-size: 0.75em;
-  text-align: left;
-  color: black;
-  float: left;
-`;
-
-const Title = styled.h3`
-  font-size: 1.5em;
-  text-align: left;
-  color: black;
-`;
-
-const DateInput = styled.input`
-  font-size: 0.4em;
-  height: 10em;
-  width: 40%;
-`;
-
-const ArrowInput = styled.input`
-  font-size: 0.8em;
-  height: 5em;
-  width: 10%;
-`;
-
-const GuestsInput = styled.input`
-  font-size: 0.4em;
-  height: 10em;
-  width: 90%;
-`;
-
-const ReserveButton = styled.button`
-  background: red;
-  font-size: 1.5em;
-  width: 90%;
-  height: 3em;
-  border-radius: 1em;
-`;
-
-const ClearClose = styled.span`
-  position: absolute;
-  right: 1em;
-  padding: 5px;
-  color: purple;
-  text-decoration: underline;
-`;
+const {
+  Wrapper,
+  PriceTitle,
+  PerNightTitle,
+  Title,
+  DateInput,
+  ArrowInput,
+  GuestsInput,
+  ReserveButton,
+  ClearClose,
+} = ReserveFormStyles;
 
 class ReserveForm extends React.Component {
   constructor(props) {
@@ -87,13 +41,6 @@ class ReserveForm extends React.Component {
     this.calculateTotalPrice = this.calculateTotalPrice.bind(this);
     this.grabGuestInfo = this.grabGuestInfo.bind(this);
     this.makeReservation = this.makeReservation.bind(this);
-  }
-
-  clearDates() {
-    this.setState({
-      startDate: 'Check In',
-      endDate: 'Check Out',
-    });
   }
 
   openCalendarModal() {
@@ -133,6 +80,29 @@ class ReserveForm extends React.Component {
     if (d !== 'Check Out') { setTimeout(this.closeCalendarModal, 500); }
   }
 
+  clearDates() {
+    this.setState({
+      startDate: 'Check In',
+      endDate: 'Check Out',
+    });
+  }
+
+  differenceBetweenStartAndEndDate() {
+    const { startDate, endDate } = this.state;
+    const startMoment = [startDate.slice(0, 4), startDate.slice(5, 7) - 1, startDate.slice(8)];
+    const endMoment = [endDate.slice(0, 4), endDate.slice(5, 7) - 1, endDate.slice(8)];
+    return moment(endMoment).diff(startMoment, 'days');
+  }
+
+  calculateTotalPrice() {
+    const { currentProperty } = this.props;
+    const nightsPrice = currentProperty.price_per_night * this.differenceBetweenStartAndEndDate();
+    const cleaning = currentProperty.cleaning_fee;
+    const service = 50;
+    const occupancy = currentProperty.occupancy_tax_fee;
+    return `$${(Number(nightsPrice) + Number(cleaning) + service + Number(occupancy)).toFixed(2)}`;
+  }
+
   grabGuestInfo(guests) {
     this.setState({
       guests,
@@ -160,22 +130,6 @@ class ReserveForm extends React.Component {
         guests: { adults: 1, children: 0, infants: 0 },
       });
     }
-  }
-
-  differenceBetweenStartAndEndDate() {
-    const { startDate, endDate } = this.state;
-    const startMoment = [startDate.slice(0, 4), startDate.slice(5, 7) - 1, startDate.slice(8)];
-    const endMoment = [endDate.slice(0, 4), endDate.slice(5, 7) - 1, endDate.slice(8)];
-    return moment(endMoment).diff(startMoment, 'days');
-  }
-
-  calculateTotalPrice() {
-    const { currentProperty } = this.props;
-    const nightsPrice = currentProperty.price_per_night * this.differenceBetweenStartAndEndDate();
-    const cleaning = currentProperty.cleaning_fee;
-    const service = 50;
-    const occupancy = currentProperty.occupancy_tax_fee;
-    return `$${(Number(nightsPrice) + Number(cleaning) + service + Number(occupancy)).toFixed(2)}`;
   }
 
   render() {
