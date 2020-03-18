@@ -23,9 +23,15 @@ class App extends React.Component {
       currentBookings: [],
       currentBlackOutDays: [],
     };
+    this.getPropertiesBookingsBlackOuts = this.getPropertiesBookingsBlackOuts.bind(this);
+    this.postNewBooking = this.postNewBooking.bind(this);
   }
 
   componentDidMount() {
+    this.getPropertiesBookingsBlackOuts();
+  }
+
+  getPropertiesBookingsBlackOuts() {
     // all 3 initial gets should be refactored to just one ajax call
     ajax({
       method: 'GET',
@@ -68,6 +74,22 @@ class App extends React.Component {
     });
   }
 
+  postNewBooking(booking) {
+    ajax({
+      method: 'POST',
+      data: JSON.stringify(booking),
+      contentType: 'application/json',
+      url: '/api/reservations/bookings',
+      success: (uuid) => {
+        this.getPropertiesBookingsBlackOuts();
+        alert(`your booking id number is ${uuid}`);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   render() {
     const { currentProperty, currentBookings, currentBlackOutDays } = this.state;
     return (
@@ -76,6 +98,7 @@ class App extends React.Component {
           currentBlackOutDays={currentBlackOutDays}
           currentBookings={currentBookings}
           currentProperty={currentProperty}
+          postNewBooking={this.postNewBooking}
         />
       </Wrapper>
     );

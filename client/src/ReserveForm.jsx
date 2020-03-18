@@ -70,7 +70,7 @@ class ReserveForm extends React.Component {
     this.state = {
       startDate: 'Check In',
       endDate: 'Check Out',
-      guests: 'Guests',
+      guests: { adults: 1, children: 0, infants: 0 },
       calendarModalOpen: false,
       guestsModalOpen: false,
     };
@@ -84,6 +84,8 @@ class ReserveForm extends React.Component {
     this.clearDates = this.clearDates.bind(this);
     this.differenceBetweenStartAndEndDate = this.differenceBetweenStartAndEndDate.bind(this);
     this.calculateTotalPrice = this.calculateTotalPrice.bind(this);
+    this.grabGuestInfo = this.grabGuestInfo.bind(this);
+    this.makeReservation = this.makeReservation.bind(this);
   }
 
   clearDates() {
@@ -130,6 +132,35 @@ class ReserveForm extends React.Component {
     if (d !== 'Check Out') { setTimeout(this.closeCalendarModal, 500); }
   }
 
+  grabGuestInfo(guests) {
+    this.setState({
+      guests,
+    });
+  }
+
+  makeReservation() {
+    const { postNewBooking, currentProperty } = this.props;
+    const { startDate, endDate, guests } = this.state;
+    if (endDate !== 'Check Out') {
+      const totalPrice = this.calculateTotalPrice();
+      const reservationInfo = {
+        property_id: currentProperty.property_id,
+        starting_date: startDate,
+        ending_date: endDate,
+        adults: guests.adults,
+        children: guests.children,
+        infants: guests.infants,
+        total_price: totalPrice,
+      };
+      postNewBooking(reservationInfo);
+      this.setState({
+        startDate: 'Check In',
+        endDate: 'Check Out',
+        guests: { adults: 1, children: 0, infants: 0 },
+      });
+    }
+  }
+
   differenceBetweenStartAndEndDate() {
     const { startDate, endDate } = this.state;
     const startMoment = [startDate.slice(0, 4), startDate.slice(5, 7) - 1, startDate.slice(8)];
@@ -143,7 +174,7 @@ class ReserveForm extends React.Component {
     const cleaning = currentProperty.cleaning_fee;
     const service = 50;
     const occupancy = currentProperty.occupancy_tax_fee;
-    return `$${Number(nightsPrice) + Number(cleaning) + service + Number(occupancy)}`;
+    return `$${(Number(nightsPrice) + Number(cleaning) + service + Number(occupancy)).toFixed(2)}`;
   }
 
   render() {
@@ -196,7 +227,12 @@ class ReserveForm extends React.Component {
         </form>
         <form id="guests-form">
           <Title>Guests</Title>
-          <GuestsInput type="text" value={guests} readOnly onClick={this.openGuestsModal} />
+          <GuestsInput
+            type="text"
+            value={`${guests.adults} adults, ${guests.children} children, ${guests.infants} infants`}
+            readOnly
+            onClick={this.openGuestsModal}
+          />
           <Modal
             id="guests-modal"
             ariaHideApp={false}
@@ -217,7 +253,7 @@ class ReserveForm extends React.Component {
               },
             }}
           >
-            <Guests currentProperty={currentProperty} />
+            <Guests currentProperty={currentProperty} grabGuestInfo={this.grabGuestInfo} />
             <div>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</div>
             <ClearClose type="submit" onClick={this.closeGuestsModal}>Close</ClearClose>
           </Modal>
@@ -228,7 +264,7 @@ class ReserveForm extends React.Component {
             <div>
               <div>
                 <span>{`$${currentProperty.price_per_night} x ${this.differenceBetweenStartAndEndDate()}`}</span>
-                <span>{`$${currentProperty.price_per_night * this.differenceBetweenStartAndEndDate()}`}</span>
+                <span>{`$${(currentProperty.price_per_night * this.differenceBetweenStartAndEndDate()).toFixed(2)}`}</span>
               </div>
               <div>
                 <span>Cleaning Fee</span>
@@ -249,7 +285,7 @@ class ReserveForm extends React.Component {
             </div>
           )
           : null}
-        <ReserveButton type="submit">Reserve</ReserveButton>
+        <ReserveButton type="submit" onClick={() => this.makeReservation()}>Reserve</ReserveButton>
       </Wrapper>
     );
   }
@@ -257,6 +293,7 @@ class ReserveForm extends React.Component {
 
 ReserveForm.propTypes = {
   currentProperty: PropTypes.shape({
+    property_id: PropTypes.number,
     price_per_night: PropTypes.string,
     max_occupants: PropTypes.string,
     cleaning_fee: PropTypes.string,
@@ -264,6 +301,7 @@ ReserveForm.propTypes = {
   }).isRequired,
   currentBlackOutDays: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   currentBookings: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  postNewBooking: PropTypes.func.isRequired,
 };
 
 export default ReserveForm;

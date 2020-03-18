@@ -41,6 +41,7 @@ class Guests extends React.Component {
     this.decrementChildren = this.decrementChildren.bind(this);
     this.incrementInfants = this.incrementInfants.bind(this);
     this.decrementInfants = this.decrementInfants.bind(this);
+    this.sendGuestInfo = this.sendGuestInfo.bind(this);
   }
 
   incrementAdults() {
@@ -50,7 +51,7 @@ class Guests extends React.Component {
       const newAdults = adults + 1;
       this.setState({
         adults: newAdults,
-      }, () => console.log('adults:', this.state.adults));
+      }, () => this.sendGuestInfo());
     }
   }
 
@@ -60,7 +61,7 @@ class Guests extends React.Component {
       const newAdults = adults - 1;
       this.setState({
         adults: newAdults,
-      }, () => console.log('adults:', this.state.adults));
+      }, () => this.sendGuestInfo());
     }
   }
 
@@ -71,7 +72,7 @@ class Guests extends React.Component {
       const newChildren = children + 1;
       this.setState({
         children: newChildren,
-      }, () => console.log('children:', this.state.children));
+      }, () => this.sendGuestInfo());
     }
   }
 
@@ -81,7 +82,7 @@ class Guests extends React.Component {
       const newChildren = children - 1;
       this.setState({
         children: newChildren,
-      }, () => console.log('children:', this.state.children));
+      }, () => this.sendGuestInfo());
     }
   }
 
@@ -91,7 +92,7 @@ class Guests extends React.Component {
       const newInfants = infants + 1;
       this.setState({
         infants: newInfants,
-      }, () => console.log('infants:', this.state.infants));
+      }, () => this.sendGuestInfo());
     }
   }
 
@@ -101,8 +102,18 @@ class Guests extends React.Component {
       const newInfants = infants - 1;
       this.setState({
         infants: newInfants,
-      }, () => console.log('infants:', this.state.infants));
+      }, () => this.sendGuestInfo());
     }
+  }
+
+  sendGuestInfo() {
+    const { grabGuestInfo } = this.props;
+    const { adults, children, infants } = this.state;
+    grabGuestInfo({
+      adults,
+      children,
+      infants,
+    });
   }
 
   render() {
@@ -146,6 +157,7 @@ Guests.propTypes = {
   currentProperty: PropTypes.shape({
     max_occupants: PropTypes.string,
   }).isRequired,
+  grabGuestInfo: PropTypes.func.isRequired,
 };
 
 export default Guests;
