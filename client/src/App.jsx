@@ -1,19 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { ajax } from 'jquery';
 import ReserveFrom from './ReserveForm';
+import Styles from './Styles';
 
-
-const Wrapper = styled.section`
-  text-align: center;
-  border: 0.5px solid grey;
-  padding: 15px;
-  position: fixed;
-  top: 10%;
-  left: 57.5%;
-  width: 35%;
-  height: 50%;
-`;
+const { AppWrapper } = Styles;
 
 class App extends React.Component {
   constructor(props) {
@@ -32,7 +22,6 @@ class App extends React.Component {
   }
 
   getPropertiesBookingsBlackOuts() {
-    // all 3 initial gets should be refactored to just one ajax call
     ajax({
       method: 'GET',
       data: { property_id: 19 },
@@ -93,14 +82,14 @@ class App extends React.Component {
   render() {
     const { currentProperty, currentBookings, currentBlackOutDays } = this.state;
     return (
-      <Wrapper>
+      <AppWrapper>
         <ReserveFrom
           currentBlackOutDays={currentBlackOutDays}
           currentBookings={currentBookings}
           currentProperty={currentProperty}
           postNewBooking={this.postNewBooking}
         />
-      </Wrapper>
+      </AppWrapper>
     );
   }
 }

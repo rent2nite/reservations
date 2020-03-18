@@ -8,7 +8,7 @@ import PriceInfo from './PriceInfo';
 import ReserveFormStyles from './Styles';
 
 const {
-  Wrapper,
+  ReserveFormWrapper,
   PriceTitle,
   PerNightTitle,
   Title,
@@ -138,7 +138,7 @@ class ReserveForm extends React.Component {
       startDate, endDate, guests, calendarModalOpen, guestsModalOpen,
     } = this.state;
     return (
-      <Wrapper>
+      <ReserveFormWrapper>
         <PriceTitle className="price-per-night">{`$${currentProperty.price_per_night} `}</PriceTitle>
         <PerNightTitle className="price-per-night">per night</PerNightTitle>
         <br />
@@ -222,7 +222,7 @@ class ReserveForm extends React.Component {
           />
         ) : null}
         <ReserveButton type="submit" onClick={() => this.makeReservation()}>Reserve</ReserveButton>
-      </Wrapper>
+      </ReserveFormWrapper>
     );
   }
 }

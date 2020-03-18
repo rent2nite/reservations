@@ -1,10 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Styles from './Styles';
 
 const {
+  CalendarWrapper,
   CalendarTable,
   CalendarHeaderRow,
   CalendarBodyRow,
@@ -13,10 +13,6 @@ const {
   BlackedOutBox,
   BeingBookedBox,
 } = Styles;
-
-const Wrapper = styled.div`
-  border: 2px solid grey;
-`;
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -213,7 +209,7 @@ class Calendar extends React.Component {
     });
 
     return (
-      <Wrapper>
+      <CalendarWrapper>
         <CalendarTable className="calendar-table">
           <thead>
             <CalendarHeaderRow>
@@ -229,7 +225,7 @@ class Calendar extends React.Component {
             {trElements}
           </tbody>
         </CalendarTable>
-      </Wrapper>
+      </CalendarWrapper>
     );
   }
 }

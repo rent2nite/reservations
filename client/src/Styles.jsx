@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 
+// App Styles
+const AppWrapper = styled.section`
+  text-align: center;
+  border: 0.5px solid grey;
+  padding: 15px;
+  position: fixed;
+  top: 10%;
+  left: 57.5%;
+  width: 35%;
+  height: 50%;
+`;
+
 // ReserveForm Styles
-const Wrapper = styled.section`
+const ReserveFormWrapper = styled.section`
   text-align: center;
 `;
 
@@ -60,6 +72,10 @@ const ClearClose = styled.span`
 `;
 
 // Calendar Styles
+const CalendarWrapper = styled.div`
+  border: 2px solid grey;
+`;
+
 const CalendarTable = styled.table`
   background-color: white;
   border-spacing: 0;
@@ -110,8 +126,32 @@ const BeingBookedBox = styled.td`
   background-color: blue;
 `;
 
+// Guests Styles
+const GuestsTable = styled.table`
+  background-color: white;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  height: 200%;
+`;
+
+const GuestsRow = styled.tr`
+  width: 100px;
+  text-align: center;
+  line-height: 56px;
+  font-size: 28px;
+  padding: 10px;
+  margin: 15px;
+`;
+
+const GuestData = styled.td`
+  text-align: center;
+  width: 50%;
+`;
+
 export default {
-  Wrapper,
+  AppWrapper,
+  ReserveFormWrapper,
   PriceTitle,
   PerNightTitle,
   Title,
@@ -120,6 +160,7 @@ export default {
   GuestsInput,
   ReserveButton,
   ClearClose,
+  CalendarWrapper,
   CalendarTable,
   CalendarHeaderRow,
   CalendarBodyRow,
@@ -127,4 +168,7 @@ export default {
   BookedBox,
   BlackedOutBox,
   BeingBookedBox,
+  GuestsTable,
+  GuestsRow,
+  GuestData,
 };

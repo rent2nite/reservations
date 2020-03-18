@@ -1,31 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Styles from './Styles';
 
-const Wrapper = styled.div`
-`;
-
-const GuestsTable = styled.table`
-  background-color: white;
-  border-spacing: 0;
-  border-collapse: collapse;
-  width: 100%;
-  height: 200%;
-`;
-
-const GuestsRow = styled.tr`
-  width: 100px;
-  text-align: center;
-  line-height: 56px;
-  font-size: 28px;
-  padding: 10px;
-  margin: 15px;
-`;
-
-const GuestData = styled.td`
-  text-align: center;
-  width: 50%;
-`;
+const { GuestsTable, GuestsRow, GuestData } = Styles;
 
 class Guests extends React.Component {
   constructor(props) {
@@ -119,7 +96,7 @@ class Guests extends React.Component {
   render() {
     const { adults, children, infants } = this.state;
     return (
-      <Wrapper>
+      <div>
         <GuestsTable className="guests-table">
           <tbody>
             <GuestsRow>
@@ -148,7 +125,7 @@ class Guests extends React.Component {
             </GuestsRow>
           </tbody>
         </GuestsTable>
-      </Wrapper>
+      </div>
     );
   }
 }
