@@ -11,8 +11,11 @@
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "mysql": "^2.18.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "react-modal": "^3.11.2",
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
@@ -40,7 +43,7 @@
     "test": "jest",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "seed": "node database/db.js"
+    "seed": "node database/seed.js"
   },
   "repository": {
     "type": "git",
