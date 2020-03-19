@@ -104,6 +104,7 @@ const CalendarModalStyle = {
     top: '30%',
     left: '57.5%',
     padding: '15px',
+    boxSizing: 'border-box',
   },
 };
 
@@ -124,6 +125,7 @@ const GuestModalStyle = {
     top: '45%',
     left: '57.5%',
     padding: '15px',
+    boxSizing: 'border-box',
   },
 };
 
@@ -227,6 +229,34 @@ const GuestData = styled.td`
   width: 50%;
 `;
 
+// PriceInfo Styles
+const PriceInfoWrapper = styled.div`
+  box-sizing: border-box;
+  justify-items: start;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-areas: 
+  "labels values"
+`;
+
+const PriceInfoLabels = styled.div`
+  grid-area: "labels";
+`;
+
+const PriceInfoLabel = styled.div`
+  text-align: left;
+  font-weight: ${(props) => (props.primary ? 'bold' : 'normal')};
+`;
+
+const PriceInfoValues = styled.div`
+  grid-area: "values";
+`;
+
+const PriceInfoValue = styled.div`
+  text-align: right;
+  font-weight: ${(props) => (props.primary ? 'bold' : 'normal')};
+`;
+
 export default {
   AppWrapper,
   ReserveFormWrapper,
@@ -257,4 +287,9 @@ export default {
   GuestsTable,
   GuestsRow,
   GuestData,
+  PriceInfoWrapper,
+  PriceInfoLabels,
+  PriceInfoValues,
+  PriceInfoLabel,
+  PriceInfoValue,
 };

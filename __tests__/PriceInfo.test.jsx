@@ -7,7 +7,7 @@ describe('Unit Tests For PriceInfo Component', () => {
   let wrapper;
   const currentProperty = { max_occupants: '9' };
   beforeEach(() => {
-    wrapper = shallow(<PriceInfo 
+    wrapper = shallow(<PriceInfo
       currentProperty={currentProperty}
       differenceBetweenStartAndEndDate={() => {}}
       calculateTotalPrice={() => {}}

@@ -1,31 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Styles from './Styles';
+
+const {
+  PriceInfoWrapper,
+  PriceInfoLabels,
+  PriceInfoValues,
+  PriceInfoLabel,
+  PriceInfoValue,
+} = Styles;
 
 const PriceInfo = (props) => {
   const { currentProperty, differenceBetweenStartAndEndDate, calculateTotalPrice } = props;
   return (
-    <div>
-      <div className="price-info-all-nights">
-        <span>{`$${currentProperty.price_per_night} x ${differenceBetweenStartAndEndDate()}`}</span>
-        <span>{`$${(currentProperty.price_per_night * differenceBetweenStartAndEndDate()).toFixed(2)}`}</span>
-      </div>
-      <div className="price-info-cleaning-fee">
-        <span>Cleaning Fee</span>
-        <span>{`$${currentProperty.cleaning_fee}`}</span>
-      </div>
-      <div className="price-info-service-fee">
-        <span>Service Fee</span>
-        <span>$50</span>
-      </div>
-      <div className="price-info-occupancy-fee">
-        <span>Occupancy Taxes and Fees</span>
-        <span>{`$${currentProperty.occupancy_tax_fee}`}</span>
-      </div>
-      <div className="price-info-total">
-        <span>Total</span>
-        <span>{calculateTotalPrice()}</span>
-      </div>
-    </div>
+    <PriceInfoWrapper>
+      <PriceInfoLabels>
+        <PriceInfoLabel className="price-info-all-nights">{`$${currentProperty.price_per_night} x ${differenceBetweenStartAndEndDate()}`}</PriceInfoLabel>
+        <PriceInfoLabel className="price-info-cleaning-fee">Cleaning Fee</PriceInfoLabel>
+        <PriceInfoLabel className="price-info-service-fee">Service Fee</PriceInfoLabel>
+        <PriceInfoLabel className="price-info-occupancy-fee">Occupancy Taxes and Fees</PriceInfoLabel>
+        <PriceInfoLabel primary className="price-info-total">Total</PriceInfoLabel>
+      </PriceInfoLabels>
+      <PriceInfoValues>
+        <PriceInfoValue className="price-info-all-nights">{`$${(currentProperty.price_per_night * differenceBetweenStartAndEndDate()).toFixed(2)}`}</PriceInfoValue>
+        <PriceInfoValue className="price-info-cleaning-fee">{`$${currentProperty.cleaning_fee}`}</PriceInfoValue>
+        <PriceInfoValue className="price-info-service-fee">$50</PriceInfoValue>
+        <PriceInfoValue className="price-info-occupancy-fee">{`$${currentProperty.occupancy_tax_fee}`}</PriceInfoValue>
+        <PriceInfoValue primary className="price-info-total">{calculateTotalPrice()}</PriceInfoValue>
+      </PriceInfoValues>
+    </PriceInfoWrapper>
   );
 };
 
