@@ -7,7 +7,11 @@ describe('Unit Tests For Guests Component', () => {
   let wrapper;
   const currentProperty = { max_occupants: '9' };
   beforeEach(() => {
-    wrapper = shallow(<Guests currentProperty={currentProperty} />);
+    wrapper = shallow(<Guests
+      currentProperty={currentProperty}
+      grabGuestInfo={() => {}}
+      postNewBooking={() => {}}
+    />);
   });
   test('should render the guests form component', () => {
     expect(wrapper).toExist();

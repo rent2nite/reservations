@@ -13,6 +13,7 @@ describe('Unit Tests For ReserveForm Component', () => {
       currentProperty={currentProperty}
       currentBookings={currentBookings}
       currentBlackOutDays={currentBlackOutDays}
+      postNewBooking={() => {}}
     />);
   });
   test('should render the reserve form component on the screen', () => {
@@ -37,6 +38,7 @@ describe('Unit Tests For ReserveForm Component Linking Properly To Calendar And 
       currentProperty={currentProperty}
       currentBookings={currentBookings}
       currentBlackOutDays={currentBlackOutDays}
+      postNewBooking={() => {}}
     />);
   });
   test('Should contain a Calendar Modal', () => {
