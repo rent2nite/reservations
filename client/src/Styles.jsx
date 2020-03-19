@@ -2,51 +2,94 @@ import styled from 'styled-components';
 
 // App Styles
 const AppWrapper = styled.section`
-  text-align: center;
-  border: 0.5px solid grey;
+  box-sizing: border-box;
+  items-align: center;
+  border: 1px solid grey;
+  margin-top: 16px;
+  margin-bottom: 24px;
   padding: 15px;
   position: fixed;
   top: 10%;
   left: 57.5%;
   width: 35%;
-  height: 50%;
 `;
 
 // ReserveForm Styles
-const ReserveFormWrapper = styled.section`
+const ReserveFormWrapper = styled.div`
+  box-sizing: border-box;
   text-align: center;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: 
+    "column-one"
+    "column-two"
+    "column-three"
+`;
+
+const TopPriceItem = styled.div`
+  padding-bottom: 20px; 
+  grid-area: "column-one";
+  display: flex;
+  justify-content: flex-start;
+  align-self: center;
+  border-bottom: 1px solid grey;
 `;
 
 const PriceTitle = styled.span`
   font-size: 1.5em;
-  text-align: left;
   color: black;
-  float: left;
+  font-weight: bold;
 `;
 
 const PerNightTitle = styled.span`
-  font-size: 0.75em;
-  text-align: left;
   color: black;
-  float: left;
+  align-self: flex-end;
+  margin-left: 3px;
 `;
 
-const Title = styled.h3`
-  font-size: 1.5em;
+const MainArea = styled.main`
+  box-sizing: border-box;
+  grid-area: "column-two";
+  padding-bottom: 15px;
+  border-bottom: 1px solid grey;
+  display: grid;
+  grid-template-rows: 1fr 1fr auto;
+  grid-template-areas: 
+    "column-one"
+    "column-two"
+    "column-three"
+`;
+
+const DatesForm = styled.form`
+  box-sizing: border-box;
+  grid-area: "column-one";
+`;
+
+const GuestsForm = styled.form`
+  box-sizing: border-box;
+  grid-area: "column-two";
+  padding-bottom: 20px;
+`;
+
+const Title = styled.div`
   text-align: left;
+  font-weight: bold;
   color: black;
+`;
+
+const InputDiv = styled.div`
+  box-sizing: border-box;
 `;
 
 const DateInput = styled.input`
-  font-size: 0.4em;
-  height: 10em;
-  width: 40%;
+  height: 50px;
+  width: 41%;
+
 `;
 
 const ArrowInput = styled.input`
-  font-size: 0.8em;
-  height: 5em;
-  width: 10%;
+  height: 50px;
+  width: 12%;
 `;
 
 const CalendarModalStyle = {
@@ -65,9 +108,8 @@ const CalendarModalStyle = {
 };
 
 const GuestsInput = styled.input`
-  font-size: 0.4em;
-  height: 10em;
-  width: 90%;
+  height: 50px;
+  width: 98%;
 `;
 
 const GuestModalStyle = {
@@ -85,12 +127,18 @@ const GuestModalStyle = {
   },
 };
 
+const BottomReserveArea = styled.div`
+  grid-area: "column-three";
+  padding-top: 20px;
+  padding-bottom: 10px;
+`;
+
 const ReserveButton = styled.button`
   background: red;
   font-size: 1.5em;
-  width: 90%;
-  height: 3em;
-  border-radius: 1em;
+  width: 98%;
+  height: 50px;
+  border-radius: 0.5em;
 `;
 
 const ClearClose = styled.span`
@@ -182,14 +230,20 @@ const GuestData = styled.td`
 export default {
   AppWrapper,
   ReserveFormWrapper,
+  TopPriceItem,
   PriceTitle,
   PerNightTitle,
+  MainArea,
+  DatesForm,
+  GuestsForm,
   Title,
+  InputDiv,
   DateInput,
   ArrowInput,
   CalendarModalStyle,
   GuestsInput,
   GuestModalStyle,
+  BottomReserveArea,
   ReserveButton,
   ClearClose,
   CalendarWrapper,
