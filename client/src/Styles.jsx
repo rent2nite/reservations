@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 // App Styles
 const AppWrapper = styled.section`
-  background-color: RGBA(211, 211, 211, 1);
   box-sizing: border-box;
   items-align: center;
   border: 1px solid grey;
@@ -80,20 +79,34 @@ const Title = styled.div`
   color: black;
 `;
 
-const InputDiv = styled.div`
+const CalendarInputDiv = styled.div`
   box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 4fr 1fr 4fr;
+  grid-template-areas: 
+    "date arrow date"
 `;
 
 const DateInput = styled.input`
+  box-sizing: border-box;
+  width: 100%;
   height: 50px;
-  width: 41%;
   font-size: 1.4em;
+  grid-area: "date";
 `;
 
 const ArrowInput = styled.input`
+  box-sizing: border-box;
+  width: 100%;
   height: 50px;
-  width: 12%;
   font-size: 1.4em;
+  grid-area: "arrow";
+`;
+
+const InputDiv = styled.div`
+  box-sizing: border-box;
+  width: 100%;
 `;
 
 const CalendarModalStyle = {
@@ -101,15 +114,13 @@ const CalendarModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    background: 'RGBA(211, 211, 211, 1)',
-    width: '31.5%',
-    height: '35%',
+    width: '33.33%',
+    height: '40%',
     position: 'fixed',
-    top: '30%',
+    top: '29%',
     left: '57.5%',
-    padding: '15px',
-    marginRight: '25px',
-    marginLeft: '25px',
+    marginRight: '15px',
+    marginLeft: '15px',
     boxSizing: 'border-box',
   },
 };
@@ -125,15 +136,14 @@ const GuestModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    background: 'RGBA(211, 211, 211, 1)',
-    width: '31.5%',
-    height: '35%',
+    width: '33.33%',
+    height: '40%',
     position: 'fixed',
-    top: '38%',
+    top: '38.5%',
     left: '57.5%',
     padding: '15px',
-    marginRight: '25px',
-    marginLeft: '25px',
+    marginRight: '15px',
+    marginLeft: '15px',
     boxSizing: 'border-box',
   },
 };
@@ -155,15 +165,18 @@ const ReserveButton = styled.button`
 
 const ClearClose = styled.span`
   position: absolute;
-  right: 1em;
-  padding: 5px;
+  right: 0px;
+  line-height: 48px;
+  font-size: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
   color: purple;
   text-decoration: underline;
 `;
 
 // Calendar Styles
 const CalendarWrapper = styled.div`
-  border: 2px solid grey;
+  box-sizing: border-box;
 `;
 
 const CalendarTable = styled.table`
@@ -271,6 +284,15 @@ const IncrementDecrementButton = styled.button`
   justify-self: center;
 `;
 
+const MaxGuests = styled.div`
+  width: 100%;
+  line-height: 48px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+`;
+
 // PriceInfo Styles
 const PriceInfoWrapper = styled.div`
   box-sizing: border-box;
@@ -316,6 +338,7 @@ export default {
   GuestsForm,
   Title,
   InputDiv,
+  CalendarInputDiv,
   DateInput,
   ArrowInput,
   CalendarModalStyle,
@@ -338,6 +361,7 @@ export default {
   GuestGroup,
   GuestValue,
   IncrementDecrementButton,
+  MaxGuests,
   PriceInfoWrapper,
   PriceInfoRow,
   PriceInfoLabel,

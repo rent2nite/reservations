@@ -17,6 +17,7 @@ const {
   GuestsForm,
   Title,
   InputDiv,
+  CalendarInputDiv,
   DateInput,
   ArrowInput,
   CalendarModalStyle,
@@ -25,6 +26,7 @@ const {
   BottomReserveArea,
   ReserveButton,
   ClearClose,
+  MaxGuests,
 } = ReserveFormStyles;
 
 class ReserveForm extends React.Component {
@@ -154,11 +156,11 @@ class ReserveForm extends React.Component {
         <MainArea>
           <DatesForm id="dates-form">
             <Title>Dates</Title>
-            <InputDiv>
+            <CalendarInputDiv>
               <DateInput className="start-date" type="text" value={startDate} readOnly onClick={this.openCalendarModal} />
               <ArrowInput disabled="disabled" value="-->" readOnly />
               <DateInput className="end-date" type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
-            </InputDiv>
+            </CalendarInputDiv>
             <Modal
               className="calender-modal"
               ariaHideApp={false}
@@ -175,7 +177,6 @@ class ReserveForm extends React.Component {
                 startDate={startDate}
                 endDate={endDate}
               />
-              <br />
               <ClearClose type="submit" onClick={this.clearDates}>Clear Dates</ClearClose>
             </Modal>
           </DatesForm>
@@ -197,7 +198,7 @@ class ReserveForm extends React.Component {
               style={GuestModalStyle}
             >
               <Guests currentProperty={currentProperty} grabGuestInfo={this.grabGuestInfo} />
-              <div>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</div>
+              <MaxGuests>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</MaxGuests>
               <ClearClose type="submit" onClick={this.closeGuestsModal}>Close</ClearClose>
             </Modal>
           </GuestsForm>
