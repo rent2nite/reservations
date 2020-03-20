@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 // App Styles
 const AppWrapper = styled.section`
+  background-color: RGBA(211, 211, 211, 1);
   box-sizing: border-box;
   items-align: center;
   border: 1px solid grey;
@@ -16,6 +17,7 @@ const AppWrapper = styled.section`
 
 // ReserveForm Styles
 const ReserveFormWrapper = styled.div`
+  position: relative;
   box-sizing: border-box;
   text-align: center;
   display: grid;
@@ -27,6 +29,7 @@ const ReserveFormWrapper = styled.div`
 `;
 
 const TopPriceItem = styled.div`
+  position: relative;
   padding-bottom: 20px; 
   grid-area: "column-one";
   display: flex;
@@ -48,6 +51,7 @@ const PerNightTitle = styled.span`
 `;
 
 const MainArea = styled.main`
+  position: relative;
   box-sizing: border-box;
   grid-area: "column-two";
   padding-bottom: 15px;
@@ -97,13 +101,15 @@ const CalendarModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    background: 'white',
-    width: '35%',
+    background: 'RGBA(211, 211, 211, 1)',
+    width: '31.5%',
     height: '35%',
     position: 'fixed',
     top: '30%',
     left: '57.5%',
     padding: '15px',
+    marginRight: '25px',
+    marginLeft: '25px',
     boxSizing: 'border-box',
   },
 };
@@ -119,18 +125,21 @@ const GuestModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    background: 'white',
-    width: '35%',
+    background: 'RGBA(211, 211, 211, 1)',
+    width: '31.5%',
     height: '35%',
     position: 'fixed',
-    top: '45%',
+    top: '38%',
     left: '57.5%',
     padding: '15px',
+    marginRight: '25px',
+    marginLeft: '25px',
     boxSizing: 'border-box',
   },
 };
 
 const BottomReserveArea = styled.div`
+  position: relative;
   grid-area: "column-three";
   padding-top: 20px;
   padding-bottom: 10px;
@@ -217,17 +226,49 @@ const GuestsTable = styled.table`
 `;
 
 const GuestsRow = styled.tr`
-  width: 100px;
-  text-align: center;
+  width: 100%;
   line-height: 56px;
   font-size: 28px;
-  padding: 10px;
   margin: 15px;
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  grid-template-areas: 
+    "title group"
+  justify-content: center;
+  align-items: center;
 `;
 
-const GuestData = styled.td`
+const GuestTitle = styled.td`
+  grid-area: "title";
   text-align: center;
-  width: 50%;
+  justify-self: start;
+`;
+
+const GuestGroup = styled.td`
+  grid-area: "group";
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-areas: 
+    "button value button"
+  justify-content: center;
+  align-items: center;
+`;
+
+const GuestValue = styled.span`
+  grid-area: "value";
+  justify-self: center;
+`;
+
+const IncrementDecrementButton = styled.button`
+  grid-area: "button";
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  font-size: 0.5em;
+  border: 1px solid grey;
+  margin-right: 20px;
+  margin-left: 20px;
+  justify-self: center;
 `;
 
 // PriceInfo Styles
@@ -249,17 +290,17 @@ const PriceInfoRow = styled.div`
   grid-area: "price-info";
   display: grid;
   grid-template-areas: 
-    "lab val"
+    "label value"
 `;
 
 const PriceInfoLabel = styled.div`
-  grid-area: "lab";
+  grid-area: "label";
   justify-self: start;
   font-weight: ${(props) => (props.primary ? 'bold' : 'normal')};
 `;
 
 const PriceInfoValue = styled.div`
-  grid-area: "val";
+  grid-area: "value";
   justify-self: end;
   font-weight: ${(props) => (props.primary ? 'bold' : 'normal')};
 `;
@@ -293,7 +334,10 @@ export default {
   BeingBookedBox,
   GuestsTable,
   GuestsRow,
-  GuestData,
+  GuestTitle,
+  GuestGroup,
+  GuestValue,
+  IncrementDecrementButton,
   PriceInfoWrapper,
   PriceInfoRow,
   PriceInfoLabel,
