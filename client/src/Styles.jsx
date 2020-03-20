@@ -51,7 +51,6 @@ const MainArea = styled.main`
   box-sizing: border-box;
   grid-area: "column-two";
   padding-bottom: 15px;
-  border-bottom: 1px solid grey;
   display: grid;
   grid-template-rows: 1fr 1fr auto;
   grid-template-areas: 
@@ -84,12 +83,13 @@ const InputDiv = styled.div`
 const DateInput = styled.input`
   height: 50px;
   width: 41%;
-
+  font-size: 1.4em;
 `;
 
 const ArrowInput = styled.input`
   height: 50px;
   width: 12%;
+  font-size: 1.4em;
 `;
 
 const CalendarModalStyle = {
@@ -111,6 +111,7 @@ const CalendarModalStyle = {
 const GuestsInput = styled.input`
   height: 50px;
   width: 98%;
+  font-size: 1.4em;
 `;
 
 const GuestModalStyle = {
@@ -234,26 +235,32 @@ const PriceInfoWrapper = styled.div`
   box-sizing: border-box;
   justify-items: start;
   display: grid;
-  grid-template-columns: 4fr 1fr;
   grid-template-areas: 
-  "labels values"
+    "price-info"
+    "price-info"
+    "price-info"
+    "price-info"
+    "price-info"
 `;
 
-const PriceInfoLabels = styled.div`
-  grid-area: "labels";
+const PriceInfoRow = styled.div`
+  width: 100%;
+  border-bottom: 1px solid grey;
+  grid-area: "price-info";
+  display: grid;
+  grid-template-areas: 
+    "lab val"
 `;
 
 const PriceInfoLabel = styled.div`
-  text-align: left;
+  grid-area: "lab";
+  justify-self: start;
   font-weight: ${(props) => (props.primary ? 'bold' : 'normal')};
 `;
 
-const PriceInfoValues = styled.div`
-  grid-area: "values";
-`;
-
 const PriceInfoValue = styled.div`
-  text-align: right;
+  grid-area: "val";
+  justify-self: end;
   font-weight: ${(props) => (props.primary ? 'bold' : 'normal')};
 `;
 
@@ -288,8 +295,7 @@ export default {
   GuestsRow,
   GuestData,
   PriceInfoWrapper,
-  PriceInfoLabels,
-  PriceInfoValues,
+  PriceInfoRow,
   PriceInfoLabel,
   PriceInfoValue,
 };
