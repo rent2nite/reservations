@@ -6,11 +6,15 @@ import Styles from './Styles';
 const {
   CalendarWrapper,
   CalendarTable,
+  CalendarHeader,
   CalendarHeaderRow,
+  CalendarTitle,
+  CalendarNav,
+  CalendarWeekdaysRow,
   CalendarBodyRow,
+  DaysOfWeek,
   Box,
-  BookedBox,
-  BlackedOutBox,
+  BlackedOutBookedBox,
   BeingBookedBox,
 } = Styles;
 
@@ -140,9 +144,9 @@ class Calendar extends React.Component {
     const { dateContext, today } = this.state;
     const weekdayNames = this.weekdaysShort.map((day) => {
       return (
-        <Box colSpan={`${8 / 7}`} key={day}>
+        <DaysOfWeek colSpan="1" key={day}>
           {day}
-        </Box>
+        </DaysOfWeek>
       );
     });
 
@@ -162,18 +166,18 @@ class Calendar extends React.Component {
         return e.day_blacked_out === this.dbFormattedTime(d);
       }) || this.isBeforeThisMonth() || (dateContext.format('YYYYMM') === today.format('YYYYMM') && d < today.format('D'))) {
         daysAfterFirstOfMonth.push(
-          <BlackedOutBox key={d * Math.random()}>
+          <BlackedOutBookedBox key={d * Math.random()}>
             {d}
-          </BlackedOutBox>,
+          </BlackedOutBookedBox>,
         );
       } else if (currentBookings.some((e) => {
         return this.dbFormattedTime(d) >= e.starting_date
         && this.dbFormattedTime(d) <= e.ending_date;
       })) {
         daysAfterFirstOfMonth.push(
-          <BookedBox key={d * Math.random()}>
+          <BlackedOutBookedBox key={d * Math.random()}>
             {d}
-          </BookedBox>,
+          </BlackedOutBookedBox>,
         );
       } else {
         daysAfterFirstOfMonth.push(
@@ -202,7 +206,7 @@ class Calendar extends React.Component {
 
     const trElements = weeks.map((weekRow) => {
       return (
-        <CalendarBodyRow className="weekly-data" colSpan="1" key={Math.random()}>
+        <CalendarBodyRow className="weekly-data" key={Math.random()}>
           {weekRow}
         </CalendarBodyRow>
       );
@@ -211,17 +215,17 @@ class Calendar extends React.Component {
     return (
       <CalendarWrapper>
         <CalendarTable className="calendar-table">
-          <thead>
+          <CalendarHeader>
             <CalendarHeaderRow>
-              <Box className="calendar-month-prev" colSpan="1" onClick={() => { this.prevMonth(); }}>{'<'}</Box>
-              <Box className="calendar-month-header" colSpan="5">{`${this.month()}, ${this.year()}`}</Box>
-              <Box className="calendar-month-next" colSpan="1" onClick={() => { this.nextMonth(); }}>{'>'}</Box>
+              <CalendarNav className="calendar-month-prev" colSpan="1" onClick={() => { this.prevMonth(); }}>{'<'}</CalendarNav>
+              <CalendarTitle className="calendar-month-header" colSpan="5">{`${this.month()}, ${this.year()}`}</CalendarTitle>
+              <CalendarNav className="calendar-month-next" colSpan="1" onClick={() => { this.nextMonth(); }}>{'>'}</CalendarNav>
             </CalendarHeaderRow>
-          </thead>
+          </CalendarHeader>
           <tbody>
-            <CalendarBodyRow className="weekdays">
+            <CalendarWeekdaysRow className="weekdays">
               {weekdayNames}
-            </CalendarBodyRow>
+            </CalendarWeekdaysRow>
             {trElements}
           </tbody>
         </CalendarTable>

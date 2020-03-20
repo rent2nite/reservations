@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-// App Styles
+// APP STYLES
 const AppWrapper = styled.section`
   box-sizing: border-box;
   items-align: center;
@@ -14,7 +14,7 @@ const AppWrapper = styled.section`
   width: 35%;
 `;
 
-// ReserveForm Styles
+// RESERVEFORM STYLES
 const ReserveFormWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
@@ -27,6 +27,7 @@ const ReserveFormWrapper = styled.div`
     "column-three"
 `;
 
+// top section of reserveform
 const TopPriceItem = styled.div`
   position: relative;
   padding-bottom: 20px; 
@@ -49,6 +50,7 @@ const PerNightTitle = styled.span`
   margin-left: 3px;
 `;
 
+// main section of reserveform
 const MainArea = styled.main`
   position: relative;
   box-sizing: border-box;
@@ -115,7 +117,7 @@ const CalendarModalStyle = {
   },
   content: {
     width: '33.33%',
-    height: '40%',
+    height: '47%',
     position: 'fixed',
     top: '29%',
     left: '57.5%',
@@ -148,6 +150,7 @@ const GuestModalStyle = {
   },
 };
 
+// bottom section of reserveform
 const BottomReserveArea = styled.div`
   position: relative;
   grid-area: "column-three";
@@ -181,52 +184,65 @@ const CalendarWrapper = styled.div`
 
 const CalendarTable = styled.table`
   background-color: white;
+  box-sizing: border-box;
+  width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
+`;
+
+const CalendarHeader = styled.thead`
   width: 100%;
-  height: 200%;
+  box-sizing: border-box;
 `;
 
 const CalendarHeaderRow = styled.tr`
-  background-color: #f1f1f1;
-  width: 100px;
-  text-align: center;
+  box-sizing: border-box;
   line-height: 56px;
   font-size: 28px;
-  padding: 10px;
-  margin: 15px;
+`;
+
+const CalendarTitle = styled.th`
+  text-align: center;
+`;
+
+const CalendarNav = styled.th`
+  text-align: center;
 `;
 
 
-const CalendarBodyRow = styled.tr`
-  width: 100px;
-  text-align: center;
-  line-height: 25px;
+const CalendarWeekdaysRow = styled.tr`
+  line-height: 50px;
   font-size: 16px;
   padding: 10px;
 `;
 
+const DaysOfWeek = styled.td`
+  text-align: center;
+  border: 1px double rgb(0, 166, 153);
+`;
+
+const CalendarBodyRow = styled.tr`
+line-height: 50px;
+font-size: 16px;
+padding: 10px;
+`;
+
 const Box = styled.td`
   text-align: center;
-  width: 1.125em;
+  border: 1px double rgb(0, 166, 153);
 `;
 
-const BookedBox = styled.td`
+const BlackedOutBookedBox = styled.td`
   text-align: center;
-  width: 1.125em;
-  background-color: yellow;
-`;
-
-const BlackedOutBox = styled.td`
-  text-align: center;
-  width: 1.125em;
-  background-color: red;
+  border: 1px double rgb(0, 166, 153);
+  color: rgb(216, 216, 216);
+  text-decoration: line-through;
 `;
 
 const BeingBookedBox = styled.td`
   text-align: center;
-  width: 1.125em;
-  background-color: blue;
+  border: 1px double rgb(0, 166, 153);
+  background: rgb(0, 166, 153);
 `;
 
 // Guests Styles
@@ -235,7 +251,6 @@ const GuestsTable = styled.table`
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
-  height: 200%;
 `;
 
 const GuestsRow = styled.tr`
@@ -337,8 +352,8 @@ export default {
   DatesForm,
   GuestsForm,
   Title,
-  InputDiv,
   CalendarInputDiv,
+  InputDiv,
   DateInput,
   ArrowInput,
   CalendarModalStyle,
@@ -349,11 +364,15 @@ export default {
   ClearClose,
   CalendarWrapper,
   CalendarTable,
+  CalendarHeader,
   CalendarHeaderRow,
+  CalendarTitle,
+  CalendarNav,
+  CalendarWeekdaysRow,
   CalendarBodyRow,
+  DaysOfWeek,
   Box,
-  BookedBox,
-  BlackedOutBox,
+  BlackedOutBookedBox,
   BeingBookedBox,
   GuestsTable,
   GuestsRow,
