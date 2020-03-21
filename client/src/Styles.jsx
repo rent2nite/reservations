@@ -10,8 +10,8 @@ const AppWrapper = styled.section`
   padding: 15px;
   position: fixed;
   top: 10%;
-  left: 57.5%;
-  width: 35%;
+  left: 56%;
+  right: 6%;
 `;
 
 // RESERVEFORM STYLES
@@ -116,13 +116,12 @@ const CalendarModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    width: '33.33%',
     height: '47%',
     position: 'fixed',
-    top: '29%',
-    left: '57.5%',
-    marginRight: '15px',
-    marginLeft: '15px',
+    top: '27.5%',
+    right: '6%',
+    left: '56%',
+    margin: '15px',
     boxSizing: 'border-box',
   },
 };
@@ -138,14 +137,12 @@ const GuestModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    width: '33.33%',
-    height: '40%',
+    top: '37%',
+    right: '6%',
+    left: '56%',
+    height: '47%',
     position: 'fixed',
-    top: '38.5%',
-    left: '57.5%',
-    padding: '15px',
-    marginRight: '15px',
-    marginLeft: '15px',
+    margin: '15px',
     boxSizing: 'border-box',
   },
 };
@@ -250,7 +247,6 @@ const GuestsTable = styled.table`
   background-color: white;
   border-spacing: 0;
   border-collapse: collapse;
-  width: 100%;
 `;
 
 const GuestsRow = styled.tr`
