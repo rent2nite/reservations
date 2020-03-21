@@ -9,7 +9,7 @@ const AppWrapper = styled.section`
   margin-bottom: 24px;
   padding: 15px;
   position: fixed;
-  top: 10%;
+  top: 50px;
   left: 56%;
   right: 3%;
 `;
@@ -124,7 +124,7 @@ const CalendarModalStyle = {
   content: {
     height: '47%',
     position: 'fixed',
-    top: '27.5%',
+    top: '220px',
     right: '3%',
     left: '56%',
     margin: '15px',
@@ -147,7 +147,7 @@ const GuestModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    top: '37%',
+    top: '320px',
     right: '3%',
     left: '56%',
     height: '40%',
