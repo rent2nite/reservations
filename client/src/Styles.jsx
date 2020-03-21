@@ -103,12 +103,13 @@ const DateInput = styled.input`
 
 const ArrowInput = styled.input`
   box-sizing: border-box;
+  text-align: center;
   width: 100%;
   height: 50px;
-  font-size: 1.4em;
+  font-size: 2em;
   grid-area: "arrow";
   @media only screen and (max-width: 1000px) {
-    font-size: 0.8em;
+    font-size: 1.4em;
   }
 `;
 
@@ -122,14 +123,13 @@ const CalendarModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    height: '47%',
+    height: '50%',
     position: 'fixed',
-    top: '220px',
+    top: '228px',
     right: '3%',
     left: '56%',
     margin: '15px',
     boxSizing: 'border-box',
-    // minWidth: '225px',
   },
 };
 
@@ -147,7 +147,7 @@ const GuestModalStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   content: {
-    top: '320px',
+    top: '318px',
     right: '3%',
     left: '56%',
     height: '40%',
@@ -237,6 +237,10 @@ padding: 10px;
 const Box = styled.td`
   text-align: center;
   border: 1px double rgb(0, 166, 153);
+  :hover {
+    background: rgb(0, 166, 153);
+    opacity: 0.4;
+  }
 `;
 
 const BlackedOutBookedBox = styled.td`

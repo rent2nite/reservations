@@ -158,7 +158,7 @@ class ReserveForm extends React.Component {
             <Title>Dates</Title>
             <CalendarInputDiv>
               <DateInput className="start-date" type="text" value={startDate} readOnly onClick={this.openCalendarModal} />
-              <ArrowInput disabled="disabled" value="-->" readOnly />
+              <ArrowInput disabled="disabled" value="→" readOnly />
               <DateInput className="end-date" type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
             </CalendarInputDiv>
             <Modal
