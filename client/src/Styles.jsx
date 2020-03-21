@@ -11,7 +11,7 @@ const AppWrapper = styled.section`
   position: fixed;
   top: 10%;
   left: 56%;
-  right: 6%;
+  right: 3%;
 `;
 
 // RESERVEFORM STYLES
@@ -119,7 +119,7 @@ const CalendarModalStyle = {
     height: '47%',
     position: 'fixed',
     top: '27.5%',
-    right: '6%',
+    right: '3%',
     left: '56%',
     margin: '15px',
     boxSizing: 'border-box',
@@ -138,9 +138,9 @@ const GuestModalStyle = {
   },
   content: {
     top: '37%',
-    right: '6%',
+    right: '3%',
     left: '56%',
-    height: '47%',
+    height: '44%',
     position: 'fixed',
     margin: '15px',
     boxSizing: 'border-box',
@@ -244,64 +244,75 @@ const BeingBookedBox = styled.td`
 
 // Guests Styles
 const GuestsTable = styled.table`
-  background-color: white;
-  border-spacing: 0;
-  border-collapse: collapse;
+  position: relative;
+  margin: 10px auto;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  text-align: center;
+`;
+
+const GuestBody = styled.tbody`
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const GuestsRow = styled.tr`
+  box-sizing: border-box;
   width: 100%;
   line-height: 56px;
   font-size: 28px;
-  margin: 15px;
   display: grid;
-  grid-template-columns: 6fr 4fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas: 
     "title group"
-  justify-content: center;
-  align-items: center;
 `;
 
 const GuestTitle = styled.td`
+  width: 100%;
   grid-area: "title";
-  text-align: center;
-  justify-self: start;
+  text-align: start;
 `;
 
 const GuestGroup = styled.td`
+  postion: relative;
+  width: 100%;
   grid-area: "group";
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: 
     "button value button"
-  justify-content: center;
-  align-items: center;
 `;
 
 const GuestValue = styled.span`
+  width: 100%;
   grid-area: "value";
   justify-self: center;
+  align-self: center;
 `;
 
 const IncrementDecrementButton = styled.button`
   grid-area: "button";
-  height: 45px;
-  width: 45px;
+  height: 3em;
+  width: 3em;
   border-radius: 50%;
   font-size: 0.5em;
   border: 1px solid grey;
-  margin-right: 20px;
-  margin-left: 20px;
+  margin-right: 1em;
+  margin-left: 1em;
   justify-self: center;
+  align-self: center;
 `;
 
 const MaxGuests = styled.div`
+  box-sizing: border-box;
   width: 100%;
   line-height: 48px;
   font-size: 20px;
   margin-bottom: 15px;
   margin-left: 15px;
   margin-right: 15px;
+  padding-right: 15px;
 `;
 
 // PriceInfo Styles
@@ -371,6 +382,7 @@ export default {
   BlackedOutBookedBox,
   BeingBookedBox,
   GuestsTable,
+  GuestBody,
   GuestsRow,
   GuestTitle,
   GuestGroup,

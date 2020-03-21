@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Styles from './Styles';
 
 const {
-  GuestsTable, GuestsRow, GuestTitle, IncrementDecrementButton, GuestValue, GuestGroup,
+  GuestsTable, GuestBody, GuestsRow, GuestTitle, IncrementDecrementButton, GuestValue, GuestGroup,
 } = Styles;
 
 class Guests extends React.Component {
@@ -100,7 +100,7 @@ class Guests extends React.Component {
     return (
       <div>
         <GuestsTable className="guests-table">
-          <tbody>
+          <GuestBody>
             <GuestsRow>
               <GuestTitle className="adults-label">Adults</GuestTitle>
               <GuestGroup>
@@ -125,7 +125,7 @@ class Guests extends React.Component {
                 <IncrementDecrementButton className="infants-increment" type="submit" onClick={this.incrementInfants}>+</IncrementDecrementButton>
               </GuestGroup>
             </GuestsRow>
-          </tbody>
+          </GuestBody>
         </GuestsTable>
       </div>
     );
