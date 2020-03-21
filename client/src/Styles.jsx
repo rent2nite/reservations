@@ -96,6 +96,9 @@ const DateInput = styled.input`
   height: 50px;
   font-size: 1.4em;
   grid-area: "date";
+  @media only screen and (max-width: 1000px) {
+    font-size: 1em;
+  }
 `;
 
 const ArrowInput = styled.input`
@@ -104,6 +107,9 @@ const ArrowInput = styled.input`
   height: 50px;
   font-size: 1.4em;
   grid-area: "arrow";
+  @media only screen and (max-width: 1000px) {
+    font-size: 0.8em;
+  }
 `;
 
 const InputDiv = styled.div`
@@ -123,6 +129,7 @@ const CalendarModalStyle = {
     left: '56%',
     margin: '15px',
     boxSizing: 'border-box',
+    // minWidth: '225px',
   },
 };
 
@@ -130,6 +137,9 @@ const GuestsInput = styled.input`
   height: 50px;
   width: 98%;
   font-size: 1.4em;
+  @media only screen and (max-width: 1000px) {
+    font-size: 1em;
+  }
 `;
 
 const GuestModalStyle = {
@@ -140,7 +150,7 @@ const GuestModalStyle = {
     top: '37%',
     right: '3%',
     left: '56%',
-    height: '44%',
+    height: '40%',
     position: 'fixed',
     margin: '15px',
     boxSizing: 'border-box',
@@ -272,6 +282,9 @@ const GuestTitle = styled.td`
   width: 100%;
   grid-area: "title";
   text-align: start;
+    @media only screen and (max-width: 800px) {
+    font-size: 0.8em;
+  }
 `;
 
 const GuestGroup = styled.td`
@@ -289,6 +302,9 @@ const GuestValue = styled.span`
   grid-area: "value";
   justify-self: center;
   align-self: center;
+  @media only screen and (max-width: 800px) {
+    font-size: 0.8em;
+  }
 `;
 
 const IncrementDecrementButton = styled.button`
@@ -302,12 +318,17 @@ const IncrementDecrementButton = styled.button`
   margin-left: 1em;
   justify-self: center;
   align-self: center;
+  @media only screen and (max-width: 800px) {
+    height: 2.3em;
+    width: 2.3em;
+    margin-right: 0.8em;
+    margin-left: 0.8em;
+  }
 `;
 
 const MaxGuests = styled.div`
   box-sizing: border-box;
   width: 100%;
-  line-height: 48px;
   font-size: 20px;
   margin-bottom: 15px;
   margin-left: 15px;
