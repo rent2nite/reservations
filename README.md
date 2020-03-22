@@ -18,10 +18,10 @@
 
 ## Usage
 
-> You may send a GET request to '/api/reservations/properties' providing a property_id (number) as the sole argument. The server will respond with an array containing a single object which contains info related to the property associated with the property_id that you sent.
-> You may send a GET request to '/api/reservations/bookings' providing a property_id (number) as the sole argument. The server will respond with an array containing many objects which contain info related to bookings associated with the property_id that you sent.
-> You may send a POST request to '/api/reservations/bookings' providing an object which contains property_id (number), starting_date (string), ending_date (string), adults (number), children (number), infants (number), and total_price (number) as the sole argument. The server will respond with an a booking_id number that it generates. This booking_id number is meant to serve as booking verification to the user who sends the POST request.
-> You may send a GET request to '/api/reservations/blackout_days' providing a property_id (number) as the sole argument. The server will respond with an array containing many objects which contain info related to blackout days associated with the property_id that you sent.
+- You may send a GET request to '/api/reservations/properties' providing a property_id (number) as the sole argument. The server will respond with an array containing a single object which contains info related to the property associated with the property_id that you sent.
+- You may send a GET request to '/api/reservations/bookings' providing a property_id (number) as the sole argument. The server will respond with an array containing many objects which contain info related to bookings associated with the property_id that you sent.
+- You may send a POST request to '/api/reservations/bookings' providing an object which contains property_id (number), starting_date (string), ending_date (string), adults (number), children (number), infants (number), and total_price (number) as the sole argument. The server will respond with an a booking_id number that it generates. This booking_id number is meant to serve as booking verification to the user who sends the POST request.
+- You may send a GET request to '/api/reservations/blackout_days' providing a property_id (number) as the sole argument. The server will respond with an array containing many objects which contain info related to blackout days associated with the property_id that you sent.
 
 ## Requirements
 
@@ -49,11 +49,15 @@ After installing all dependencies:
 
 ## Dependencies
 
-From within the root directory:
+From within the root directory of this repository:
 
 ```sh
-npm install --save react react-dom react-modal prop-types styled-components jquery express body-parser mysql moment faker
-npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-eslint babel-jest babel-loader
-npm install --save-dev webpack webpack-cli nodemon jest jest-enzyme jest-environment-enzyme enzyme enzyme-adapter-react-16
-npm install eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
+npm install --save react react-dom react-modal prop-types styled-components
+jquery express body-parser mysql moment faker
+npm install --save-dev @babel/core @babel/preset-env @babel/preset-react
+babel-eslint babel-jest babel-loader
+npm install --save-dev webpack webpack-cli nodemon
+jest jest-enzyme jest-environment-enzyme enzyme enzyme-adapter-react-16
+npm install --save eslint eslint-config-airbnb eslint-plugin-import
+eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
 ```
