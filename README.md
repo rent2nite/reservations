@@ -39,11 +39,11 @@ After installing all dependencies:
 - Setup your jest.config.js file. Ensure that you create a test folder.
 - Setup your express server to serve the client/dist directory staticly.
 - Setup your database folder with schema, db (used to connect), and seed (used to populate sample data) files.
-- To create your initial db go to terminal and run ```sh mysql -u root < database/schema.sql ``` from the root directory of this project.
+- To create your initial db go to terminal and run ```sh mysql -u root < database/schema.sql``` from the root directory of this project.
 - Style your project in the Styles component
 - Write code for your components, starting with index, then App, then ReserveForm, then Calendar, then Guests, then PriceInfo
-- Next run ```sh npm run seed ``` to populate your database with sample data.
-- Next run ```sh npm run react-dev ``` then ```sh nom run server-dev``` to start webpack and run your express server.
+- Next run ```sh npm run seed``` to populate your database with sample data.
+- Next run ```sh npm run react-dev``` then ```sh npm run server-dev``` to start webpack and run your express server.
 - Finally open up your favorite browser and type http://localhost:3001/ into your URL bar!
 
 
@@ -54,10 +54,13 @@ From within the root directory of this repository:
 ```sh
 npm install --save react react-dom react-modal prop-types styled-components
 jquery express body-parser mysql moment faker
+
 npm install --save-dev @babel/core @babel/preset-env @babel/preset-react
 babel-eslint babel-jest babel-loader
+
 npm install --save-dev webpack webpack-cli nodemon
 jest jest-enzyme jest-environment-enzyme enzyme enzyme-adapter-react-16
+
 npm install --save eslint eslint-config-airbnb eslint-plugin-import
 eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
 ```
