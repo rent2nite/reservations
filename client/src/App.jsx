@@ -1,6 +1,6 @@
 import React from 'react';
 import { ajax } from 'jquery';
-import ReserveFrom from './ReserveForm';
+import ReserveForm from './ReserveForm';
 import Styles from './Styles';
 
 const { AppWrapper } = Styles;
@@ -24,7 +24,7 @@ class App extends React.Component {
   getPropertiesBookingsBlackOuts() {
     ajax({
       method: 'GET',
-      data: { property_id: 19 },
+      data: { property_id: 16 },
       url: '/api/reservations/properties',
       success: (data) => {
         this.setState({
@@ -37,7 +37,7 @@ class App extends React.Component {
     });
     ajax({
       method: 'GET',
-      data: { property_id: 19 },
+      data: { property_id: 16 },
       url: '/api/reservations/bookings',
       success: (data) => {
         this.setState({
@@ -50,7 +50,7 @@ class App extends React.Component {
     });
     ajax({
       method: 'GET',
-      data: { property_id: 19 },
+      data: { property_id: 16 },
       url: '/api/reservations/blackout_days',
       success: (data) => {
         this.setState({
@@ -83,7 +83,7 @@ class App extends React.Component {
     const { currentProperty, currentBookings, currentBlackOutDays } = this.state;
     return (
       <AppWrapper>
-        <ReserveFrom
+        <ReserveForm
           currentBlackOutDays={currentBlackOutDays}
           currentBookings={currentBookings}
           currentProperty={currentProperty}
