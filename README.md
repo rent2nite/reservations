@@ -56,11 +56,11 @@ npm install --save react react-dom react-modal prop-types styled-components
 jquery express body-parser mysql moment faker
 
 npm install --save-dev @babel/core @babel/preset-env @babel/preset-react
-babel-eslint babel-jest babel-loader
+babel-eslint babel-jest babel-loader css-loader style-loader
 
 npm install --save-dev webpack webpack-cli nodemon
 jest jest-enzyme jest-environment-enzyme enzyme enzyme-adapter-react-16
 
-npm install --save eslint eslint-config-airbnb eslint-plugin-import
+npm install --save-dev eslint eslint-config-airbnb eslint-plugin-import
 eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
 ```
