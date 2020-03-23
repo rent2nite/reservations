@@ -12,6 +12,11 @@ const AppWrapper = styled.section`
   top: 50px;
   left: 56%;
   right: 3%;
+  @media only screen and (max-width: 900px) {
+    position: absolute;
+    left: 3%;
+    right: 3%;
+  }
 `;
 
 // RESERVEFORM STYLES
@@ -36,6 +41,9 @@ const TopPriceItem = styled.div`
   justify-content: flex-start;
   align-self: center;
   border-bottom: 1px solid grey;
+  @media only screen and (max-width: 400px) {
+    font-size: 0.8em;
+  }
 `;
 
 const PriceTitle = styled.span`
@@ -96,7 +104,7 @@ const DateInput = styled.input`
   height: 50px;
   font-size: 1.4em;
   grid-area: "date";
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 400px) {
     font-size: 1em;
   }
 `;
@@ -108,7 +116,7 @@ const ArrowInput = styled.input`
   height: 50px;
   font-size: 2em;
   grid-area: "arrow";
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 400px) {
     font-size: 1.4em;
   }
 `;
@@ -137,7 +145,7 @@ const GuestsInput = styled.input`
   height: 50px;
   width: 98%;
   font-size: 1.4em;
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 400px) {
     font-size: 1em;
   }
 `;
@@ -182,6 +190,9 @@ const ClearClose = styled.span`
   margin-right: 15px;
   color: purple;
   text-decoration: underline;
+  @media only screen and (max-width: 400px) {
+    font-size: 0.7em;
+  }
 `;
 
 // Calendar Styles
@@ -206,6 +217,9 @@ const CalendarHeaderRow = styled.tr`
   box-sizing: border-box;
   line-height: 56px;
   font-size: 28px;
+  @media only screen and (max-width: 400px) {
+    font-size: 1em;
+  }
 `;
 
 const CalendarTitle = styled.th`
@@ -272,6 +286,7 @@ const GuestBody = styled.tbody`
 `;
 
 const GuestsRow = styled.tr`
+  padding: 10px;
   box-sizing: border-box;
   width: 100%;
   line-height: 56px;
@@ -286,7 +301,7 @@ const GuestTitle = styled.td`
   width: 100%;
   grid-area: "title";
   text-align: start;
-    @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 400px) {
     font-size: 0.8em;
   }
 `;
@@ -306,7 +321,7 @@ const GuestValue = styled.span`
   grid-area: "value";
   justify-self: center;
   align-self: center;
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 400px) {
     font-size: 0.8em;
   }
 `;
@@ -322,11 +337,11 @@ const IncrementDecrementButton = styled.button`
   margin-left: 1em;
   justify-self: center;
   align-self: center;
-  @media only screen and (max-width: 800px) {
-    height: 2.3em;
-    width: 2.3em;
-    margin-right: 0.8em;
-    margin-left: 0.8em;
+  @media only screen and (max-width: 400px) {
+    height: 2em;
+    width: 2em;
+    margin-right: 0.6em;
+    margin-left: 0.6em;
   }
 `;
 
@@ -334,10 +349,7 @@ const MaxGuests = styled.div`
   box-sizing: border-box;
   width: 100%;
   font-size: 20px;
-  margin-bottom: 15px;
-  margin-left: 15px;
-  margin-right: 15px;
-  padding-right: 15px;
+  padding: 10px;
 `;
 
 // PriceInfo Styles

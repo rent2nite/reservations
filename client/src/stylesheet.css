@@ -1,0 +1,46 @@
+.CalendarModal {
+  background-color: white;
+  height: 50%;
+  position: fixed;
+  top: 228px;
+  right: 3%;
+  left: 56%;
+  margin: 15px;
+  box-sizing: border-box;
+}
+
+.GuestModal {
+  background-color: white;
+  height: 40%;
+  position: fixed;
+  top: 228px;
+  right: 3%;
+  left: 56%;
+  margin: 15px;
+  box-sizing: border-box;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: 'rgba(0, 0, 0, 0)';
+}  
+
+@media (max-width: 900px) {  
+
+.CalendarModal {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+}
+
+.GuestModal {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+}
+
+}

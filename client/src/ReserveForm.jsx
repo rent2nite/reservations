@@ -5,7 +5,8 @@ import moment from 'moment';
 import Calendar from './Calendar';
 import Guests from './Guests';
 import PriceInfo from './PriceInfo';
-import ReserveFormStyles from './Styles';
+import Styles from './Styles';
+import stylesheet from './stylesheet.css';
 
 const {
   ReserveFormWrapper,
@@ -20,14 +21,14 @@ const {
   CalendarInputDiv,
   DateInput,
   ArrowInput,
-  CalendarModalStyle,
   GuestsInput,
-  GuestModalStyle,
+  // CalendarModalStyle,
+  // GuestModalStyle,
   BottomReserveArea,
   ReserveButton,
   ClearClose,
   MaxGuests,
-} = ReserveFormStyles;
+} = Styles;
 
 class ReserveForm extends React.Component {
   constructor(props) {
@@ -162,11 +163,13 @@ class ReserveForm extends React.Component {
               <DateInput className="end-date" type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
             </CalendarInputDiv>
             <Modal
-              className="calender-modal"
+              id="calendar-modal"
               ariaHideApp={false}
               isOpen={calendarModalOpen}
               onRequestClose={this.closeCalendarModal}
-              style={CalendarModalStyle}
+              // style={CalendarModalStyle}
+              className={stylesheet.CalendarModal}
+              overlayClassName={stylesheet.Overlay}
             >
               <Calendar
                 currentProperty={currentProperty}
@@ -195,7 +198,9 @@ class ReserveForm extends React.Component {
               ariaHideApp={false}
               isOpen={guestsModalOpen}
               onRequestClose={this.closeGuestsModal}
-              style={GuestModalStyle}
+              // style={GuestModalStyle}
+              className={stylesheet.GuestModal}
+              overlayClassName={stylesheet.Overlay}
             >
               <Guests currentProperty={currentProperty} grabGuestInfo={this.grabGuestInfo} />
               <MaxGuests>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</MaxGuests>
