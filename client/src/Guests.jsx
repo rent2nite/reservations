@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 
-const { GuestsTable, GuestsRow, GuestData } = Styles;
+const {
+  GuestsTable, GuestBody, GuestsRow, GuestTitle, IncrementDecrementButton, GuestValue, GuestGroup,
+} = Styles;
 
 class Guests extends React.Component {
   constructor(props) {
@@ -98,32 +100,32 @@ class Guests extends React.Component {
     return (
       <div>
         <GuestsTable className="guests-table">
-          <tbody>
+          <GuestBody>
             <GuestsRow>
-              <GuestData className="adults-label">Adults</GuestData>
-              <GuestData>
-                <button className="adults-decrement" type="submit" onClick={this.decrementAdults}>-</button>
-                {adults}
-                <button className="adults-increment" type="submit" onClick={this.incrementAdults}>+</button>
-              </GuestData>
+              <GuestTitle className="adults-label">Adults</GuestTitle>
+              <GuestGroup>
+                <IncrementDecrementButton className="adults-decrement" type="submit" onClick={this.decrementAdults}>-</IncrementDecrementButton>
+                <GuestValue>{adults}</GuestValue>
+                <IncrementDecrementButton className="adults-increment" type="submit" onClick={this.incrementAdults}>+</IncrementDecrementButton>
+              </GuestGroup>
             </GuestsRow>
             <GuestsRow>
-              <GuestData className="children-label">Children</GuestData>
-              <GuestData>
-                <button className="children-decrement" type="submit" onClick={this.decrementChildren}>-</button>
-                {children}
-                <button className="children-increment" type="submit" onClick={this.incrementChildren}>+</button>
-              </GuestData>
+              <GuestTitle className="children-label">Children</GuestTitle>
+              <GuestGroup>
+                <IncrementDecrementButton className="children-decrement" type="submit" onClick={this.decrementChildren}>-</IncrementDecrementButton>
+                <GuestValue>{children}</GuestValue>
+                <IncrementDecrementButton className="children-increment" type="submit" onClick={this.incrementChildren}>+</IncrementDecrementButton>
+              </GuestGroup>
             </GuestsRow>
             <GuestsRow>
-              <GuestData className="infants-label">Infants</GuestData>
-              <GuestData>
-                <button className="infants-decrement" type="submit" onClick={this.decrementInfants}>-</button>
-                {infants}
-                <button className="infants-increment" type="submit" onClick={this.incrementInfants}>+</button>
-              </GuestData>
+              <GuestTitle className="infants-label">Infants</GuestTitle>
+              <GuestGroup>
+                <IncrementDecrementButton className="infants-decrement" type="submit" onClick={this.decrementInfants}>-</IncrementDecrementButton>
+                <GuestValue>{infants}</GuestValue>
+                <IncrementDecrementButton className="infants-increment" type="submit" onClick={this.incrementInfants}>+</IncrementDecrementButton>
+              </GuestGroup>
             </GuestsRow>
-          </tbody>
+          </GuestBody>
         </GuestsTable>
       </div>
     );

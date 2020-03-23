@@ -9,16 +9,24 @@ import ReserveFormStyles from './Styles';
 
 const {
   ReserveFormWrapper,
+  TopPriceItem,
   PriceTitle,
   PerNightTitle,
+  MainArea,
+  DatesForm,
+  GuestsForm,
   Title,
+  InputDiv,
+  CalendarInputDiv,
   DateInput,
   ArrowInput,
   CalendarModalStyle,
   GuestsInput,
   GuestModalStyle,
+  BottomReserveArea,
   ReserveButton,
   ClearClose,
+  MaxGuests,
 } = ReserveFormStyles;
 
 class ReserveForm extends React.Component {
@@ -141,63 +149,70 @@ class ReserveForm extends React.Component {
     } = this.state;
     return (
       <ReserveFormWrapper>
-        <PriceTitle className="price-per-night">{`$${currentProperty.price_per_night} `}</PriceTitle>
-        <PerNightTitle className="price-per-night">per night</PerNightTitle>
-        <br />
-        <form id="dates-form">
-          <Title>Dates</Title>
-          <DateInput className="start-date" type="text" value={startDate} readOnly onClick={this.openCalendarModal} />
-          <ArrowInput disabled="disabled" value="-->" readOnly />
-          <DateInput className="end-date" type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
-          <Modal
-            className="calender-modal"
-            ariaHideApp={false}
-            isOpen={calendarModalOpen}
-            onRequestClose={this.closeCalendarModal}
-            style={CalendarModalStyle}
-          >
-            <Calendar
+        <TopPriceItem>
+          <PriceTitle className="price-per-night">{`$${currentProperty.price_per_night}`}</PriceTitle>
+          <PerNightTitle className="price-per-night">per night</PerNightTitle>
+        </TopPriceItem>
+        <MainArea>
+          <DatesForm id="dates-form">
+            <Title>Dates</Title>
+            <CalendarInputDiv>
+              <DateInput className="start-date" type="text" value={startDate} readOnly onClick={this.openCalendarModal} />
+              <ArrowInput disabled="disabled" value="→" readOnly />
+              <DateInput className="end-date" type="text" value={endDate} readOnly onClick={this.openCalendarModal} />
+            </CalendarInputDiv>
+            <Modal
+              className="calender-modal"
+              ariaHideApp={false}
+              isOpen={calendarModalOpen}
+              onRequestClose={this.closeCalendarModal}
+              style={CalendarModalStyle}
+            >
+              <Calendar
+                currentProperty={currentProperty}
+                currentBookings={currentBookings}
+                currentBlackOutDays={currentBlackOutDays}
+                populateStartDateField={this.populateStartDateField}
+                populateEndDateField={this.populateEndDateField}
+                startDate={startDate}
+                endDate={endDate}
+              />
+              <ClearClose type="submit" onClick={this.clearDates}>Clear Dates</ClearClose>
+            </Modal>
+          </DatesForm>
+          <GuestsForm id="guests-form">
+            <InputDiv>
+              <Title>Guests</Title>
+              <GuestsInput
+                type="text"
+                value={`${guests.adults} adults, ${guests.children} children, ${guests.infants} infants`}
+                readOnly
+                onClick={this.openGuestsModal}
+              />
+            </InputDiv>
+            <Modal
+              id="guests-modal"
+              ariaHideApp={false}
+              isOpen={guestsModalOpen}
+              onRequestClose={this.closeGuestsModal}
+              style={GuestModalStyle}
+            >
+              <Guests currentProperty={currentProperty} grabGuestInfo={this.grabGuestInfo} />
+              <MaxGuests>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</MaxGuests>
+              <ClearClose type="submit" onClick={this.closeGuestsModal}>Close</ClearClose>
+            </Modal>
+          </GuestsForm>
+          {endDate !== 'Check Out' ? (
+            <PriceInfo
               currentProperty={currentProperty}
-              currentBookings={currentBookings}
-              currentBlackOutDays={currentBlackOutDays}
-              populateStartDateField={this.populateStartDateField}
-              populateEndDateField={this.populateEndDateField}
-              startDate={startDate}
-              endDate={endDate}
+              differenceBetweenStartAndEndDate={this.differenceBetweenStartAndEndDate}
+              calculateTotalPrice={this.calculateTotalPrice}
             />
-            <br />
-            <ClearClose type="submit" onClick={this.clearDates}>Clear Dates</ClearClose>
-          </Modal>
-        </form>
-        <form id="guests-form">
-          <Title>Guests</Title>
-          <GuestsInput
-            type="text"
-            value={`${guests.adults} adults, ${guests.children} children, ${guests.infants} infants`}
-            readOnly
-            onClick={this.openGuestsModal}
-          />
-          <Modal
-            id="guests-modal"
-            ariaHideApp={false}
-            isOpen={guestsModalOpen}
-            onRequestClose={this.closeGuestsModal}
-            style={GuestModalStyle}
-          >
-            <Guests currentProperty={currentProperty} grabGuestInfo={this.grabGuestInfo} />
-            <div>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</div>
-            <ClearClose type="submit" onClick={this.closeGuestsModal}>Close</ClearClose>
-          </Modal>
-        </form>
-        <br />
-        {endDate !== 'Check Out' ? (
-          <PriceInfo
-            currentProperty={currentProperty}
-            differenceBetweenStartAndEndDate={this.differenceBetweenStartAndEndDate}
-            calculateTotalPrice={this.calculateTotalPrice}
-          />
-        ) : null}
-        <ReserveButton type="submit" onClick={() => this.makeReservation()}>Reserve</ReserveButton>
+          ) : null}
+        </MainArea>
+        <BottomReserveArea>
+          <ReserveButton type="submit" onClick={() => this.makeReservation()}>Reserve</ReserveButton>
+        </BottomReserveArea>
       </ReserveFormWrapper>
     );
   }
