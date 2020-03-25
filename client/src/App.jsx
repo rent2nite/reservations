@@ -13,18 +13,24 @@ class App extends React.Component {
       currentBookings: [],
       currentBlackOutDays: [],
     };
+    this.randomNum = this.randomNum.bind(this);
     this.getPropertiesBookingsBlackOuts = this.getPropertiesBookingsBlackOuts.bind(this);
     this.postNewBooking = this.postNewBooking.bind(this);
   }
 
-  componentDidMount() {
-    this.getPropertiesBookingsBlackOuts();
+  randomNum() {
+    return Math.floor(Math.random() * 101);
   }
 
-  getPropertiesBookingsBlackOuts() {
+  componentDidMount() {
+    this.getPropertiesBookingsBlackOuts(this.randomNum());
+  }
+
+
+  getPropertiesBookingsBlackOuts(propertyId) {
     ajax({
       method: 'GET',
-      data: { property_id: 16 },
+      data: { property_id: propertyId },
       url: '/api/reservations/properties',
       success: (data) => {
         this.setState({
@@ -37,7 +43,7 @@ class App extends React.Component {
     });
     ajax({
       method: 'GET',
-      data: { property_id: 16 },
+      data: { property_id: propertyId },
       url: '/api/reservations/bookings',
       success: (data) => {
         this.setState({
@@ -50,7 +56,7 @@ class App extends React.Component {
     });
     ajax({
       method: 'GET',
-      data: { property_id: 16 },
+      data: { property_id: propertyId },
       url: '/api/reservations/blackout_days',
       success: (data) => {
         this.setState({
@@ -70,7 +76,7 @@ class App extends React.Component {
       contentType: 'application/json',
       url: '/api/reservations/bookings',
       success: (uuid) => {
-        this.getPropertiesBookingsBlackOuts();
+        this.getPropertiesBookingsBlackOuts(booking.property_id);
         alert(`your booking id number is ${uuid}`);
       },
       error: (err) => {

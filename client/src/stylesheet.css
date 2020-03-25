@@ -1,23 +1,27 @@
 .CalendarModal {
   background-color: white;
-  height: 50%;
   position: fixed;
-  top: 228px;
+  top: 180px;
   right: 3%;
-  left: 56%;
+  left: 66%;
   margin: 15px;
   box-sizing: border-box;
+  border: 1px double rgb(0, 166, 153);
+  padding: 5px;
+  z-index: 100;
 }
 
 .GuestModal {
   background-color: white;
-  height: 40%;
   position: fixed;
-  top: 228px;
+  top: 280px;
   right: 3%;
-  left: 56%;
+  left: 66%;
   margin: 15px;
   box-sizing: border-box;
+  border: 1px double rgb(0, 166, 153);
+  padding: 5px;
+  z-index: 100;
 }
 
 .Overlay {

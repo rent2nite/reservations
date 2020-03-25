@@ -26,6 +26,7 @@ const {
   // GuestModalStyle,
   BottomReserveArea,
   ReserveButton,
+  ClearDates,
   ClearClose,
   MaxGuests,
 } = Styles;
@@ -180,7 +181,7 @@ class ReserveForm extends React.Component {
                 startDate={startDate}
                 endDate={endDate}
               />
-              <ClearClose type="submit" onClick={this.clearDates}>Clear Dates</ClearClose>
+              <ClearDates onClick={this.clearDates}>Clear Dates</ClearDates>
             </Modal>
           </DatesForm>
           <GuestsForm id="guests-form">
@@ -204,7 +205,7 @@ class ReserveForm extends React.Component {
             >
               <Guests currentProperty={currentProperty} grabGuestInfo={this.grabGuestInfo} />
               <MaxGuests>{`${currentProperty.max_occupants} guests maximum. Infants don't count toward the number of guests.`}</MaxGuests>
-              <ClearClose type="submit" onClick={this.closeGuestsModal}>Close</ClearClose>
+              <ClearDates onClick={this.closeGuestsModal}>Close</ClearDates>
             </Modal>
           </GuestsForm>
           {endDate !== 'Check Out' ? (

@@ -5,12 +5,11 @@ const AppWrapper = styled.section`
   box-sizing: border-box;
   items-align: center;
   border: 1px solid grey;
-  margin-top: 16px;
   margin-bottom: 24px;
   padding: 15px;
   position: fixed;
-  top: 50px;
-  left: 56%;
+  top: 22.5px;
+  left: 66%;
   right: 3%;
   @media only screen and (max-width: 900px) {
     position: absolute;
@@ -49,14 +48,16 @@ const TopPriceItem = styled.div`
 const PriceTitle = styled.span`
   font-size: 1.5em;
   color: black;
-  font-weight: bold;
+  font-weight: 530;
 `;
 
 const PerNightTitle = styled.span`
   color: black;
   align-self: flex-end;
   margin-left: 3px;
+  font-weight: 530;
 `;
+
 
 // main section of reserveform
 const MainArea = styled.main`
@@ -85,7 +86,7 @@ const GuestsForm = styled.form`
 
 const Title = styled.div`
   text-align: left;
-  font-weight: bold;
+  font-weight: 500;
   color: black;
 `;
 
@@ -102,10 +103,10 @@ const DateInput = styled.input`
   box-sizing: border-box;
   width: 100%;
   height: 50px;
-  font-size: 1.4em;
+  font-size: 1em;
   grid-area: "date";
   @media only screen and (max-width: 400px) {
-    font-size: 1em;
+    font-size: 0.8em;
   }
 `;
 
@@ -114,10 +115,10 @@ const ArrowInput = styled.input`
   text-align: center;
   width: 100%;
   height: 50px;
-  font-size: 2em;
+  font-size: 1.5em;
   grid-area: "arrow";
   @media only screen and (max-width: 400px) {
-    font-size: 1.4em;
+    font-size: 1em;
   }
 `;
 
@@ -144,9 +145,9 @@ const CalendarModalStyle = {
 const GuestsInput = styled.input`
   height: 50px;
   width: 98%;
-  font-size: 1.4em;
+  font-size: 1em;
   @media only screen and (max-width: 400px) {
-    font-size: 1em;
+    font-size: 0.8em;
   }
 `;
 
@@ -174,20 +175,21 @@ const BottomReserveArea = styled.div`
 `;
 
 const ReserveButton = styled.button`
-  background: red;
+  background: rgb(255, 90, 95);
+  color: white; 
   font-size: 1.5em;
   width: 98%;
   height: 50px;
   border-radius: 0.5em;
 `;
 
-const ClearClose = styled.span`
-  position: absolute;
-  right: 0px;
-  line-height: 48px;
-  font-size: 20px;
-  margin-left: 15px;
-  margin-right: 15px;
+const ClearDates = styled.div`
+  background: white;
+  bottom: 10px;
+  right: 10px;
+  font-size: 16px;
+  text-align: right;
+  // padding: 10px;
   color: purple;
   text-decoration: underline;
   @media only screen and (max-width: 400px) {
@@ -290,7 +292,8 @@ const GuestsRow = styled.tr`
   box-sizing: border-box;
   width: 100%;
   line-height: 56px;
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 200;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 
@@ -346,10 +349,14 @@ const IncrementDecrementButton = styled.button`
 `;
 
 const MaxGuests = styled.div`
+  background: white;
   box-sizing: border-box;
   width: 100%;
-  font-size: 20px;
+  font-size: 18px;
   padding: 10px;
+  @media only screen and (max-width: 400px) {
+    font-size: 0.7em;
+  }
 `;
 
 // PriceInfo Styles
@@ -405,7 +412,7 @@ export default {
   GuestModalStyle,
   BottomReserveArea,
   ReserveButton,
-  ClearClose,
+  ClearDates,
   CalendarWrapper,
   CalendarTable,
   CalendarHeader,
