@@ -6,13 +6,16 @@ const AppWrapper = styled.section`
   items-align: center;
   border: 1px solid grey;
   margin-bottom: 24px;
-  padding: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   position: fixed;
   top: 22.5px;
   left: 66%;
   right: 3%;
   @media only screen and (max-width: 900px) {
-    position: absolute;
+    position: static;
     left: 3%;
     right: 3%;
   }
@@ -382,12 +385,14 @@ const PriceInfoRow = styled.div`
 `;
 
 const PriceInfoLabel = styled.div`
+  color: black;
   grid-area: "label";
   justify-self: start;
   font-weight: ${(props) => (props.primary ? 'bold' : 'normal')};
 `;
 
 const PriceInfoValue = styled.div`
+  color: black;
   grid-area: "value";
   justify-self: end;
   font-weight: ${(props) => (props.primary ? 'bold' : 'normal')};

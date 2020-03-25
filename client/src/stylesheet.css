@@ -1,12 +1,12 @@
 .CalendarModal {
   background-color: white;
   position: fixed;
-  top: 180px;
+  top: 160px;
   right: 3%;
   left: 66%;
-  margin: 15px;
+  margin: 17.5px;
   box-sizing: border-box;
-  border: 1px double rgb(0, 166, 153);
+  border: 1px solid grey;
   padding: 5px;
   z-index: 100;
 }
@@ -14,12 +14,12 @@
 .GuestModal {
   background-color: white;
   position: fixed;
-  top: 280px;
+  top: 260px;
   right: 3%;
   left: 66%;
-  margin: 15px;
+  margin: 17.5px;
   box-sizing: border-box;
-  border: 1px double rgb(0, 166, 153);
+  border: 1px solid grey;
   padding: 5px;
   z-index: 100;
 }
