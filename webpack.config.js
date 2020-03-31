@@ -1,7 +1,8 @@
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-  // mode: "production", // "production" | "development" | "none"
+  mode: 'production', // "production" | "development" | "none"
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
   entry: path.resolve(__dirname, 'client/src/index.jsx'), // string | object | array
   // defaults to ./src
@@ -50,6 +51,13 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.(js|css)$/,
+    }),
+  ],
   resolve: {
     extensions: ['.js', '.jsx'],
   },
